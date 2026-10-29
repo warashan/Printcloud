@@ -1,6 +1,6 @@
 # PrintCloud / TNE Centralizado — Design System v2.0
 
-Propuesta de **interfaz nueva**. No es una personalización de Minton ni de Bootstrap.
+Propuesta de **interfaz nueva** creada para migrar de php a nuevas tecnologías.
 
 ## Abrir prototipo
 
