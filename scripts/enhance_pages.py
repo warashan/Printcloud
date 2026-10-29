@@ -5,8 +5,7 @@ los HTML resultantes NO dependen de Python ni de este paquete en ejecución.
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-BRAND='''<picture class="brand-picture" aria-hidden="true"><img class="brand-wordmark" src="assets/brand/printcloud_blanco.png" width="1001" height="241" alt=""></picture><span class="sr-only">PrintCloud by Concordia — Biblioteca de componentes</span>'''
-TOP='''<a class="topbar-brand" href="index.html" aria-label="PrintCloud — Inicio de la biblioteca"><img class="topbar-brand-color" src="assets/brand/printcloud_color.png" alt="" width="1001" height="241"><img class="topbar-brand-white" src="assets/brand/printcloud_blanco.png" alt="" width="1001" height="241"><img class="topbar-brand-symbol" src="assets/brand/favicon.png" alt="" width="151" height="151"></a>'''
+BRAND='''<picture class="brand-picture" aria-hidden="true"><img class="brand-wordmark" src="assets/brand/printcloud_blanco.png" width="1001" height="241" alt=""></picture><img alt="" class="brand-symbol" height="38" src="assets/brand/favicon.png" width="38" /><span class="sr-only">PrintCloud by Concordia — Biblioteca de componentes</span>'''
 LOGIN_COLOR='''<a class="login-mobile-brand" href="index.html" aria-label="PrintCloud by Concordia — Biblioteca de componentes"><img class="login-mobile-logo-color" src="assets/brand/printcloud_color.png" width="1001" height="241" alt=""><img class="login-mobile-logo-white" src="assets/brand/printcloud_blanco.png" width="1001" height="241" alt=""></a>'''
 
 def fragment(html):
@@ -15,6 +14,8 @@ def fragment(html):
 def enhance_all(root: Path):
   for file in sorted(root.glob('*.html')):
     soup=BeautifulSoup(file.read_text(encoding='utf-8'),'html.parser')
+    for choice in soup.select('[data-theme-choice="system"]'):
+      choice.decompose()
     head=soup.head
     link=soup.new_tag('link', rel='icon', href='assets/brand/favicon.png', type='image/png');head.append(link)
     # La estructura visual contiene un solo H1 por vista. Skip link visible al foco.
@@ -45,9 +46,13 @@ def enhance_all(root: Path):
     topbar=soup.select_one('.topbar')
     if topbar:
       left=topbar.select_one('.topbar-left')
-      if left:
-        menu=left.select_one('#menuToggle')
-        if menu: menu.insert_after(fragment(TOP).a)
+      if left and not left.select_one('#sidebarToggle'):
+        left.insert(0,fragment('''<button aria-controls="sidebar" aria-expanded="true" aria-label="Contraer menú lateral" class="icon-btn sidebar-toggle" id="sidebarToggle" title="Contraer menú lateral" type="button"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18m7-13-4 4 4 4"></path></svg></button>''').button)
+      for logo in topbar.select('.topbar-brand'):
+        logo.decompose()
+      right=topbar.select_one('.topbar-right')
+      if right and not right.select_one('#notificationToggle'):
+        right.insert(0,fragment((root/'components/notificaciones.html').read_text(encoding='utf-8')).select_one('.notification-center'))
       avatar=topbar.select_one('.avatar')
       if avatar:avatar['aria-label']='PrintCloud — perfil de demostración'
     logo=soup.select_one('.login-logo')

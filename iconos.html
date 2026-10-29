@@ -43,6 +43,13 @@
               width="1001"
             />
           </picture>
+          <img
+            alt=""
+            class="brand-symbol"
+            height="38"
+            src="assets/brand/favicon.png"
+            width="38"
+          />
           <span class="sr-only">
             PrintCloud by Concordia — Biblioteca de componentes
           </span>
@@ -86,6 +93,17 @@
               <path d="m7 21 5-9 5 9H7Z"></path>
             </svg>
             <span>Iconografía</span>
+          </a>
+          <a class="nav-link" href="loaders.html">
+            <svg
+              class="icon"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M20 12a8 8 0 1 1-5.5-7.6"></path>
+            </svg>
+            <span>Loaders y spinners</span>
           </a>
           <a class="nav-link" href="formularios.html">
             <svg
@@ -650,6 +668,25 @@
           <div class="topbar-left">
             <button
               aria-controls="sidebar"
+              aria-expanded="true"
+              aria-label="Contraer menú lateral"
+              class="icon-btn sidebar-toggle"
+              id="sidebarToggle"
+              title="Contraer menú lateral"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="icon"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <path d="M9 3v18m7-13-4 4 4 4"></path>
+              </svg>
+            </button>
+            <button
+              aria-controls="sidebar"
               aria-expanded="false"
               aria-label="Abrir menú"
               class="icon-btn mobile-menu"
@@ -665,52 +702,76 @@
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </button>
-            <a
-              aria-label="PrintCloud — Inicio de la biblioteca"
-              class="topbar-brand"
-              href="index.html"
-            >
-              <img
-                alt=""
-                class="topbar-brand-color"
-                height="241"
-                src="assets/brand/printcloud_color.png"
-                width="1001"
-              />
-              <img
-                alt=""
-                class="topbar-brand-white"
-                height="241"
-                src="assets/brand/printcloud_blanco.png"
-                width="1001"
-              />
-              <img
-                alt=""
-                class="topbar-brand-symbol"
-                height="151"
-                src="assets/brand/favicon.png"
-                width="151"
-              />
-            </a>
             <div>
               <div class="breadcrumb">Diseño de producto / PrintCloud</div>
               <div class="topbar-name">Matriz de íconos</div>
             </div>
           </div>
           <div class="topbar-right">
-            <span class="badge badge-info user-caption">
-              <svg
-                aria-hidden="true"
-                class="icon icon-sm"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            <!-- Historial local de notificaciones compartido por las páginas de la biblioteca. -->
+            <div class="notification-center">
+              <button
+                class="icon-btn notification-toggle"
+                id="notificationToggle"
+                type="button"
+                aria-label="Notificaciones"
+                aria-controls="notificationPanel"
+                aria-expanded="false"
+                title="Notificaciones"
               >
-                <path
-                  d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Zm7 12 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"
-                ></path>
-              </svg>
-              Propuesta UI
-            </span>
+                <svg
+                  aria-hidden="true"
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"
+                  ></path>
+                </svg>
+                <span
+                  class="notification-count"
+                  id="notificationCount"
+                  aria-hidden="true"
+                  hidden
+                ></span>
+              </button>
+              <section
+                class="notification-panel"
+                id="notificationPanel"
+                aria-labelledby="notificationTitle"
+                hidden
+              >
+                <div class="notification-header">
+                  <h2 class="card-title" id="notificationTitle">
+                    Notificaciones
+                  </h2>
+                  <button
+                    class="icon-btn"
+                    id="notificationClose"
+                    type="button"
+                    aria-label="Cerrar historial de notificaciones"
+                  >
+                    ×
+                  </button>
+                </div>
+                <p class="notification-empty" id="notificationEmpty">
+                  No tienes notificaciones guardadas.
+                </p>
+                <ol class="notification-list" id="notificationList"></ol>
+                <div class="notification-footer">
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    id="notificationClear"
+                    type="button"
+                    disabled
+                  >
+                    Vaciar historial
+                  </button>
+                </div>
+              </section>
+            </div>
+
             <div aria-label="Apariencia" class="theme-wrap" role="group">
               <button
                 aria-label="Tema claro"
@@ -747,24 +808,6 @@
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path d="M20.9 13A9 9 0 0 1 11 3.1a9 9 0 1 0 9.9 9.9Z"></path>
-                </svg>
-              </button>
-              <button
-                aria-label="Tema del sistema"
-                aria-pressed="false"
-                class="theme-btn"
-                data-theme-choice="system"
-                title="Usar tema del sistema"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="icon icon-sm"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect height="15" rx="2" width="20" x="2" y="3"></rect>
-                  <path d="M8 22h8M12 18v4"></path>
                 </svg>
               </button>
             </div>

@@ -4,8 +4,161 @@
   const $ = (s, ctx = document) => ctx.querySelector(s);
   const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
   const spanish = (n, singular, plural) => `${n} ${n === 1 ? singular : plural}`;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reveal = element => {
+    if (!element?.animate || reducedMotion.matches) return;
+    element.getAnimations().forEach(animation => animation.cancel());
+    element.animate([
+      { opacity: 0, transform: 'translateY(6px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: 200, easing: 'cubic-bezier(.2,.7,.2,1)' });
+  };
+
+  // Conservar la semántica nativa y permitir invertir la animación con clics rápidos.
+  $$('details').forEach(details => {
+    const summary = details.querySelector('summary');
+    if (!summary || !details.animate) return;
+    let animation;
+    let expanding = details.open;
+    const finish = open => {
+      details.open = open;
+      details.style.height = '';
+      details.style.overflow = '';
+      animation = null;
+    };
+    summary.addEventListener('click', event => {
+      if (reducedMotion.matches) {
+        if (animation) {
+          animation.cancel();
+          finish(expanding);
+        }
+        return;
+      }
+      event.preventDefault();
+      const startHeight = details.getBoundingClientRect().height;
+      expanding = animation ? !expanding : !details.open;
+      animation?.cancel();
+      details.open = true;
+      details.style.height = '';
+      const summaryStyle = getComputedStyle(summary);
+      const detailsStyle = getComputedStyle(details);
+      const endHeight = expanding ? details.getBoundingClientRect().height
+        : summary.getBoundingClientRect().height + parseFloat(summaryStyle.marginTop) + parseFloat(summaryStyle.marginBottom)
+          + parseFloat(detailsStyle.paddingTop) + parseFloat(detailsStyle.paddingBottom)
+          + parseFloat(detailsStyle.borderTopWidth) + parseFloat(detailsStyle.borderBottomWidth);
+      if (!expanding && details.contains(document.activeElement)) summary.focus();
+      details.style.overflow = 'hidden';
+      animation = details.animate([
+        { height: `${startHeight}px` }, { height: `${endHeight}px` }
+      ], { duration: 240, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      animation.onfinish = () => finish(expanding);
+    });
+    reducedMotion.addEventListener('change', () => {
+      if (reducedMotion.matches && animation) {
+        animation.cancel();
+        finish(expanding);
+      }
+    });
+  });
+
+  /* Historial local: cerrar un toast no elimina su copia guardada. */
+  const notificationKey = 'printcloud-ds-notifications';
+  const notificationPanel = $('#notificationPanel');
+  const notificationToggle = $('#notificationToggle');
+  const notificationTones = { success: 'Éxito', info: 'Información', warning: 'Advertencia', danger: 'Error' };
+  const parseNotifications = value => {
+    try {
+      const items = JSON.parse(value);
+      return Array.isArray(items) ? items.filter(item => item && typeof item.message === 'string'
+        && item.message.length <= 2000 && Object.hasOwn(notificationTones, item.tone)
+        && typeof item.time === 'string' && Number.isFinite(Date.parse(item.time))
+        && typeof item.read === 'boolean').slice(0, 50) : [];
+    } catch (_) { return []; }
+  };
+  let notifications = [];
+  try { notifications = parseNotifications(localStorage.getItem(notificationKey)); } catch (_) {}
+  const saveNotifications = () => {
+    try { localStorage.setItem(notificationKey, JSON.stringify(notifications)); } catch (_) {}
+  };
+  const renderNotifications = () => {
+    if (!notificationToggle || !notificationPanel) return;
+    const unread = notifications.filter(item => !item.read).length;
+    const badge = $('#notificationCount');
+    badge.textContent = unread > 9 ? '9+' : String(unread);
+    badge.hidden = unread === 0;
+    notificationToggle.setAttribute('aria-label', unread ? `Notificaciones: ${spanish(unread, 'sin leer', 'sin leer')}` : 'Notificaciones');
+    $('#notificationEmpty').hidden = notifications.length > 0;
+    $('#notificationClear').disabled = notifications.length === 0;
+    const list = $('#notificationList');
+    list.replaceChildren();
+    notifications.forEach(item => {
+      const row = document.createElement('li');
+      row.className = 'notification-item';
+      row.dataset.tone = item.tone;
+      const tone = document.createElement('strong');
+      tone.className = 'notification-tone';
+      tone.textContent = notificationTones[item.tone];
+      const message = document.createElement('p');
+      message.textContent = item.message;
+      const time = document.createElement('time');
+      time.dateTime = item.time;
+      time.textContent = new Intl.DateTimeFormat('es-CL', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(item.time));
+      row.append(tone, message, time);
+      list.append(row);
+    });
+  };
+  const closeNotifications = (restoreFocus = false) => {
+    if (!notificationPanel || notificationPanel.hidden) return;
+    notificationPanel.hidden = true;
+    notificationToggle.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) notificationToggle.focus();
+  };
+  notificationToggle?.addEventListener('click', () => {
+    if (!notificationPanel.hidden) { closeNotifications(); return; }
+    notificationPanel.hidden = false;
+    notificationToggle.setAttribute('aria-expanded', 'true');
+    notifications.forEach(item => { item.read = true; });
+    saveNotifications();
+    renderNotifications();
+    reveal(notificationPanel);
+    $('#notificationClose').focus();
+  });
+  $('#notificationClose')?.addEventListener('click', () => closeNotifications(true));
+  $('#notificationClear')?.addEventListener('click', () => {
+    notifications = [];
+    saveNotifications();
+    renderNotifications();
+    $('#notificationClose').focus();
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.notification-center')) closeNotifications();
+  });
+  document.addEventListener('focusin', event => {
+    if (!event.target.closest('.notification-center')) closeNotifications();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && notificationPanel && !notificationPanel.hidden) {
+      event.preventDefault();
+      closeNotifications(true);
+    }
+  });
+  window.addEventListener('storage', event => {
+    if (event.key !== notificationKey && event.key !== null) return;
+    notifications = parseNotifications(event.newValue);
+    if (notificationPanel && !notificationPanel.hidden && notifications.some(item => !item.read)) {
+      notifications.forEach(item => { item.read = true; });
+      saveNotifications();
+    }
+    renderNotifications();
+  });
+  renderNotifications();
 
   function toast(message, tone = 'info') {
+    tone = Object.hasOwn(notificationTones, tone) ? tone : 'info';
+    notifications.unshift({ message: String(message).slice(0, 2000), tone, time: new Date().toISOString(), read: Boolean(notificationPanel && !notificationPanel.hidden) });
+    notifications = notifications.slice(0, 50);
+    saveNotifications();
+    renderNotifications();
     const zone = $('#toastZone');
     if (!zone) return;
     const t = document.createElement('div');
@@ -16,6 +169,7 @@
     content.textContent = message;
     const close = document.createElement('button');
     close.className = 'alert-dismiss';
+    close.type = 'button';
     close.setAttribute('aria-label', 'Cerrar notificación');
     close.textContent = '×';
     close.addEventListener('click', () => t.remove());
@@ -40,6 +194,24 @@
   const menu = $('#menuToggle');
   const sidebarClose = $('#sidebarClose');
   const isMobile = () => window.matchMedia('(max-width: 840px)').matches;
+  const sidebarToggle = $('#sidebarToggle');
+  const syncSidebarToggle = () => {
+    if (!sidebarToggle) return;
+    const collapsed = document.documentElement.dataset.sidebar === 'collapsed';
+    const label = collapsed ? 'Expandir menú lateral' : 'Contraer menú lateral';
+    sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+    sidebarToggle.setAttribute('aria-label', label);
+    sidebarToggle.title = label;
+  };
+  sidebarToggle?.addEventListener('click', () => {
+    if (isMobile()) return;
+    const collapsed = document.documentElement.dataset.sidebar !== 'collapsed';
+    document.documentElement.dataset.sidebar = collapsed ? 'collapsed' : 'expanded';
+    try { localStorage.setItem('printcloud-ds-sidebar', collapsed ? 'collapsed' : 'expanded'); } catch (_) {}
+    syncSidebarToggle();
+  });
+  $$('.sidebar .nav-link').forEach(link => { link.title = link.textContent.trim(); });
+  syncSidebarToggle();
   const focusables = () => $$('.sidebar a[href], .sidebar button:not([disabled]), .sidebar summary');
   const closeMobile = (restore = true) => {
     const wasOpen = sidebar?.classList.contains('is-open');
@@ -91,10 +263,15 @@
       const temp = document.createElement('textarea');
       temp.value = text; temp.style.position='fixed';temp.style.opacity='0';
       document.body.append(temp);temp.select();
-      try { document.execCommand('copy'); } catch (_) {}
-      temp.remove();
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch (_) {}
+      finally { temp.remove(); }
+      if (!copied) {
+        toast('No se pudo copiar. Selecciona el código y cópialo manualmente.', 'warning');
+        return;
+      }
     }
-    toast(`Copiado: ${text}`, 'success');
+    toast(text.trim().startsWith('<') ? 'Código HTML copiado.' : `Copiado: ${text}`, 'success');
   }
   $$('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>copy(btn.dataset.copy)));
   const iconSearch = $('#iconSearch');
@@ -104,6 +281,35 @@
     items.forEach(item => {const show=item.dataset.copy.toLowerCase().includes(query);item.hidden=!show;if(show)n++;});
     if ($('#iconCount')) $('#iconCount').textContent=spanish(n,'ícono encontrado','íconos encontrados');
   });
+
+  const loaderSearch = $('#loaderSearch');
+  const loaderPause = $('#loaderPause');
+  const filterLoaders = () => {
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const query = normalize(loaderSearch.value.trim());
+    let count = 0;
+    $$('[data-loader-item]').forEach(item => {
+      item.hidden = !normalize(item.dataset.loaderSearch).includes(query);
+      if (!item.hidden) count++;
+    });
+    $('#loaderCount').textContent = spanish(count, 'indicador disponible', 'indicadores disponibles');
+    $('#loaderEmpty').hidden = count !== 0;
+  };
+  loaderSearch?.addEventListener('input', filterLoaders);
+  loaderPause?.addEventListener('click', () => {
+    const paused = loaderPause.getAttribute('aria-pressed') !== 'true';
+    $('#mainContent').classList.toggle('loaders-paused', paused);
+    loaderPause.setAttribute('aria-pressed', String(paused));
+    loaderPause.textContent = paused ? 'Reanudar animaciones' : 'Pausar animaciones';
+  });
+  const syncLoaderMotion = () => {
+    if (!loaderPause) return;
+    loaderPause.disabled = reducedMotion.matches;
+    loaderPause.textContent = reducedMotion.matches ? 'Movimiento reducido'
+      : loaderPause.getAttribute('aria-pressed') === 'true' ? 'Reanudar animaciones' : 'Pausar animaciones';
+  };
+  syncLoaderMotion();
+  reducedMotion.addEventListener('change', syncLoaderMotion);
 
   /* Formularios: validación de presencia, no se realiza validación de RUT ni envío real. */
   const demoForm = $('#demoForm');
@@ -150,6 +356,7 @@
     $('#stepEyebrow').textContent=`Paso ${String(currentStep+1).padStart(2,'0')} / 05`;
     $('#stepBadge').textContent=`Etapa ${currentStep+1} de 5`;
     $('#stepStage').innerHTML=stepContent[currentStep];
+    reveal($('#stepStage'));
     $$('#stepStage input').forEach((el,i) => {el.id='stepField'+i;const label=el.closest('div')?.querySelector('label');if(label)label.htmlFor=el.id;});
     $('#stepPrev').disabled=currentStep===0;
     next.textContent=currentStep===4?'Finalizar demostración':'Siguiente →';

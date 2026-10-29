@@ -5,8 +5,8 @@ Propuesta de **interfaz nueva** creada para migrar de php a nuevas tecnologías.
 ## Abrir prototipo
 
 1. Descomprimir el ZIP respetando las carpetas.
-2. Abrir `index.html` en el navegador. Desde allí se accede a las **10 páginas**.
-3. Cambiar apariencia en la barra superior: **Claro / Oscuro / Sistema**. Se guarda en `localStorage` de ese navegador.
+2. Abrir `index.html` en el navegador. Desde allí se accede a las **11 páginas**.
+3. Cambiar apariencia en la barra superior: **Claro / Oscuro**. Se guarda en `localStorage` de ese navegador.
 4. El prototipo contiene datos ficticios; no incluye autenticación, integraciones, acceso a cámara ni envío a impresión.
 
 Las hojas CSS compiladas, los SVG y la lógica de los ejemplos están incluidos y **no requieren CDN**. La tipografía **Fira Sans** se carga opcionalmente desde Google Fonts; si no hay conexión, se utiliza la fuente alternativa del sistema. En una intranet productiva conviene empaquetar Fira Sans de una fuente licenciada junto al proyecto, conforme a la política de la organización.
@@ -19,6 +19,7 @@ Las hojas CSS compiladas, los SVG y la lógica de los ejemplos están incluidos 
 | `login.html` | Login | Composición institucional, visibilidad de contraseña, validación **solo de demostración** |
 | `tipografia.html` | Matriz tipográfica | Fira Sans, 400–700, jerarquía, tamaños, identificadores TNE |
 | `iconos.html` | Matriz de iconos | Catálogo de SVG estilo Lucide, filtrado y copia de nombre |
+| `loaders.html` | Loaders y spinners | Ocho variantes, buscador, pausa de animaciones y código para copiar |
 | `formularios.html` | Formularios | Inputs, selects, date, textarea, checkbox, radio, switch, archivo y validación |
 | `steppers.html` | Steppers | Proceso interactivo de 5 pasos y patrón vertical |
 | `modales.html` | Modales | Detalle, confirmación y advertencia mediante `<dialog>` |
