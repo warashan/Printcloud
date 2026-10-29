@@ -1,0 +1,10 @@
+<!-- PrintCloud / Modal nativo accesible: apertura con dialog.showModal(), cierre con dialog.close() -->
+<dialog id="pcConfirm" class="dialog" aria-labelledby="pcConfirmTitle" aria-describedby="pcConfirmDescription">
+  <div class="dialog-header"><h2 id="pcConfirmTitle" class="card-title">Confirmar solicitud</h2></div>
+  <div id="pcConfirmDescription" class="dialog-content">Revisa los datos antes de continuar.</div>
+  <div class="dialog-footer">
+    <button type="button" class="btn btn-secondary" onclick="document.getElementById('pcConfirm').close()">Cancelar</button>
+    <button type="button" class="btn btn-primary">Confirmar</button>
+  </div>
+</dialog>
+<!-- En integración productiva asociar eventos mediante addEventListener, no usar JS inline. -->

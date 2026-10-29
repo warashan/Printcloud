@@ -1,0 +1,233 @@
+[
+  {
+    "grupo": "Dashboards",
+    "elementos": [
+      "Dashboard Centralizado"
+    ]
+  },
+  {
+    "grupo": "Reposiciones",
+    "elementos": [
+      "Solicitudes de reposición",
+      "Reposiciones INSITU",
+      "Depósitos",
+      "Transferencias"
+    ]
+  },
+  {
+    "grupo": "Impresiones Centralizado",
+    "elementos": [
+      "Ingreso de tarjetas centralizadas",
+      "Impresión centralizada",
+      "Sobres centralizados",
+      "Mermas de tarjetas centralizadas",
+      "Recepción de tarjetas para impresión"
+    ]
+  },
+  {
+    "grupo": "Captura Fotográfica",
+    "elementos": [
+      "Captura fotográfica",
+      "Revisión de capturas",
+      "Revisión de capturas centralizadas",
+      "Revisión de capturas INSITU",
+      "Inspección de capturas",
+      "Administración de edición fotográfica",
+      "Edición fotográfica"
+    ]
+  },
+  {
+    "grupo": "Revalidacion",
+    "elementos": [
+      "Base de revalidaciones",
+      "Entrega de sellos"
+    ]
+  },
+  {
+    "grupo": "Otras Atenciones",
+    "elementos": [
+      "Activación de tarjetas",
+      "Actualización de datos",
+      "Revisión de actualizaciones",
+      "Carga SIGE",
+      "Revisión de cargas SIGE"
+    ]
+  },
+  {
+    "grupo": "Entregas TNE",
+    "elementos": [
+      "Entrega de tarjetas nuevas",
+      "Entrega de tarjetas centralizadas",
+      "Entrega de tarjetas INSITU",
+      "Entrega de tarjetas normales"
+    ]
+  },
+  {
+    "grupo": "Stock",
+    "elementos": [
+      "Asignaciones de folios",
+      "Asignaciones de folios INSITU",
+      "Consulta de lotes asignados"
+    ]
+  },
+  {
+    "grupo": "Stock Temporales",
+    "elementos": [
+      "Lotes de tarjetas temporales",
+      "Asignar lotes temporales a oficina",
+      "Préstamo de tarjetas temporales",
+      "Cambio de tarjeta temporal",
+      "Consulta de tarjetas temporales",
+      "Arqueo de tarjetas temporales",
+      "Arqueo de temporales bloqueadas"
+    ]
+  },
+  {
+    "grupo": "Stock Nuevos",
+    "elementos": [
+      "Carga de tarjetas nuevas",
+      "Recepción de tarjetas nuevas",
+      "Asignar tarjetas nuevas a oficina",
+      "Arqueo de tarjetas nuevas",
+      "Carga de tarjetas normales",
+      "Carga de tarjetas centralizadas",
+      "Asignar tarjetas normales a oficina",
+      "Asignar tarjetas centralizadas a oficina"
+    ]
+  },
+  {
+    "grupo": "Stock InSitu",
+    "elementos": [
+      "Lotes de tarjetas INSITU",
+      "Asignar tarjetas INSITU a oficina",
+      "Mermas y robos de tarjetas INSITU",
+      "Máquinas INSITU por sucursal"
+    ]
+  },
+  {
+    "grupo": "Stock Sellos",
+    "elementos": [
+      "Carga de sellos",
+      "Asignar sellos a oficina",
+      "Asignación diaria de sellos",
+      "Mermas y robos de sellos",
+      "Consulta y stock de sellos"
+    ]
+  },
+  {
+    "grupo": "Encuesta",
+    "elementos": [
+      "Procesos de encuesta",
+      "Resultados de encuestas",
+      "Rendimiento de encuestas"
+    ]
+  },
+  {
+    "grupo": "Reportes",
+    "elementos": [
+      "Reporte consolidado",
+      "Reporte desagrupado",
+      "Historial de reportes",
+      "Reporte mensual",
+      "Reporte de entregas centralizadas",
+      "Reporte de entregas INSITU",
+      "Stock de tarjetas centralizadas",
+      "Stock CENTRALIZADO",
+      "Stock de tarjetas nuevas",
+      "Stock de tarjetas INSITU",
+      "Stock de tarjetas normales",
+      "Reporte de atención presencial",
+      "Reporte de atención remota"
+    ]
+  },
+  {
+    "grupo": "Gestión de Atención",
+    "elementos": [
+      "Configuración de horarios de atención",
+      "Reservas de atención",
+      "Listado de reservas de atención"
+    ]
+  },
+  {
+    "grupo": "Administración",
+    "elementos": [
+      "Administrar usuarios",
+      "Crear y editar grupos",
+      "Privilegios de grupo",
+      "Opciones de bloqueo de usuarios",
+      "Bancos",
+      "Establecimientos",
+      "Credenciales API"
+    ]
+  },
+  {
+    "grupo": "Configuraciones",
+    "elementos": [
+      "Plantillas de documentos",
+      "Plantillas de correo",
+      "Trámites",
+      "Documentos",
+      "Documentos por trámite",
+      "Tipos de trámite y procesos",
+      "Asignar trámites a ejecutivos",
+      "Asignar trámites a oficinas",
+      "Configuración de tareas programadas"
+    ]
+  },
+  {
+    "grupo": "Atenciones",
+    "elementos": [
+      "Gestor documental",
+      "Documentos temporales"
+    ]
+  },
+  {
+    "grupo": "Atención Mesa Presencial",
+    "elementos": [
+      "Configurar horarios presenciales",
+      "Asignar turnos presenciales",
+      "Reservar atención presencial",
+      "Reservas presenciales"
+    ]
+  },
+  {
+    "grupo": "Atención Mesa Remota",
+    "elementos": [
+      "Configurar horarios remotos",
+      "Asignar turnos remotos",
+      "Reservar atención remota",
+      "Reservas remotas",
+      "Atenciones remotas (demo)"
+    ]
+  },
+  {
+    "grupo": "RRHH",
+    "elementos": [
+      "Documentos de RRHH"
+    ]
+  },
+  {
+    "grupo": "Beca Indigena",
+    "elementos": [
+      "Beca indígena",
+      "Actas de beca indígena"
+    ]
+  },
+  {
+    "grupo": "Kioscos",
+    "elementos": [
+      "Kioscos"
+    ]
+  },
+  {
+    "grupo": "MODO MATRIX",
+    "elementos": []
+  },
+  {
+    "grupo": "SuperAdmin",
+    "elementos": [
+      "Config. de Cuenta",
+      "Config. de Menús"
+    ]
+  }
+]

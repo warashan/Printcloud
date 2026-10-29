@@ -1,0 +1,8 @@
+<!-- PrintCloud / Campo: label, required, hint, error -->
+<div class="pc-field-group">
+  <label class="label" for="pc-rut">RUT del estudiante (obligatorio)</label>
+  <input class="field" id="pc-rut" name="rut" type="text" autocomplete="off" required aria-describedby="pc-rut-help pc-rut-error" />
+  <p id="pc-rut-help" class="field-hint">Ejemplo: 12.345.678-9</p>
+  <p id="pc-rut-error" class="field-error" hidden>Ingresa el RUT del estudiante.</p>
+</div>
+<!-- JS: establecer aria-invalid=true cuando falle la validación, desocultar error y enfocar el campo. -->
