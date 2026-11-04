@@ -1,0 +1,126 @@
+{
+  "results": [
+    {
+      "name": "Slider a 360px en tema light",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 360px en tema dark",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 360px en tema system",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 768px en tema light",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 768px en tema dark",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 768px en tema system",
+      "status": "Aprobado",
+      "layout": "formulario primero",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1024px en tema light",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1024px en tema dark",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1024px en tema system",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1440px en tema light",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1440px en tema dark",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Slider a 1440px en tema system",
+      "status": "Aprobado",
+      "layout": "dos columnas",
+      "stable": true
+    },
+    {
+      "name": "Teclado nativo, árbol accesible y ausencia de rotación automática",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Movimiento reducido",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sistema sigue cambios de apariencia del SO",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Login de demostración mediante Enter",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Tabla: selección, foco al paginar, detalle nativo y descarga CSV filtrada",
+      "status": "Aprobado",
+      "csvRows": 2
+    },
+    {
+      "name": "Menú móvil: fondo inerte, foco contenido, notificaciones y Escape",
+      "status": "Aprobado"
+    },
+    {
+      "name": "11 pantallas sin desbordamiento a 360px",
+      "status": "Aprobado"
+    },
+    {
+      "name": "11 pantallas sin desbordamiento a 768px",
+      "status": "Aprobado"
+    },
+    {
+      "name": "11 pantallas sin desbordamiento a 1024px",
+      "status": "Aprobado"
+    },
+    {
+      "name": "11 pantallas sin desbordamiento a 1440px",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Reflow equivalente de 200%/400% (zoom nativo pendiente)",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sin excepciones JavaScript en navegador",
+      "status": "Aprobado"
+    }
+  ],
+  "errors": []
+}

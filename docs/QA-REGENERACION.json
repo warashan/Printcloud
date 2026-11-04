@@ -1,0 +1,18 @@
+{
+  "regenerated": true,
+  "postprocessIdempotent": true,
+  "pages": 11,
+  "sha256": {
+    "alertas.html": "ab1d45292f42fad0b8d4527d7b91c1b27af879bbfd753a25219725feecf11a9b",
+    "buscadores.html": "c90c43cb75397a1ef8f32a16cc727910395d87ba872b99b0a33a7dee95eb7783",
+    "formularios.html": "7a9170b5da510586395b5b83bbbdd8cfe2879c10d39c274e72870c6f4dc5a6bd",
+    "iconos.html": "938a85c4a375e571292fb6510ae45b8c232a5935e9752265ebc30301a276379c",
+    "index.html": "17a3456b3d37671d70467e64a2ebba677e2ac4c56e549ecc411acea3545f8e62",
+    "loaders.html": "4c28873773380519d714655015ff814835b74ee1e81e9392042839660f603032",
+    "login.html": "9af41d750f62f22910f532c2f2d8d06cc58393e5f85d36ac0d3cd95c0022d53b",
+    "modales.html": "dcdf5eab2a114f5c91d8d39b36ae9fd1c1ec37d9d2c5f66576f93dda27f3288d",
+    "steppers.html": "8ae0ab899c5d23a955a7b70bbba2186dcbb4c427639aa1b44f2613360058f00d",
+    "tablas.html": "3709f77408d85f453512e90f2c616f61945a774542445ae233ee0a1ae9712e2c",
+    "tipografia.html": "07c138676a64bf2348cb2687edf712e49873a6abba359a133cc5ab827e9fe5e8"
+  }
+}

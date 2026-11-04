@@ -1,0 +1,26 @@
+<div class="profile-menu">
+  <button type="button" class="avatar profile-toggle" id="profileToggle" aria-label="Abrir menú de perfil de PrintCloud" aria-haspopup="menu" aria-expanded="false" aria-controls="profileMenu">PC</button>
+  <div class="profile-dropdown" id="profileMenu" role="menu" aria-labelledby="profileToggle" hidden>
+    <button type="button" class="profile-menu-item" id="profileSettings" role="menuitem" tabindex="-1">
+      <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h8m4 0h4M4 17h4m4 0h8"></path><circle cx="14" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>
+      Configuración
+    </button>
+    <a class="profile-menu-item profile-menu-logout" href="login.html" role="menuitem" tabindex="-1">
+      <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 4H4v16h5M13 8l4 4-4 4M8 12h13"></path></svg>
+      Cerrar sesión
+    </a>
+  </div>
+</div>
+<dialog class="dialog profile-settings-dialog" id="profileSettingsDialog" aria-labelledby="profileSettingsTitle" aria-describedby="profileSettingsDescription">
+  <div class="dialog-header"><h2 class="section-title" id="profileSettingsTitle">Configuración</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Cerrar configuración">×</button></div>
+  <div class="dialog-content">
+    <p class="card-detail" id="profileSettingsDescription">Personaliza la apariencia de PrintCloud. Tu preferencia se guarda en este navegador.</p>
+    <p class="label" id="profileAppearanceTitle">Apariencia</p>
+    <div class="profile-theme-options" role="group" aria-labelledby="profileAppearanceTitle">
+      <button type="button" class="btn btn-secondary" data-theme-choice="light" aria-pressed="false">Claro</button>
+      <button type="button" class="btn btn-secondary" data-theme-choice="dark" aria-pressed="false">Oscuro</button>
+      <button type="button" class="btn btn-secondary" data-theme-choice="system" aria-pressed="false">Sistema</button>
+    </div>
+  </div>
+  <div class="dialog-footer"><button type="button" class="btn btn-primary" data-close-dialog>Listo</button></div>
+</dialog>

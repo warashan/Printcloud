@@ -66,3 +66,8 @@ npm run build
 ```
 
 La estructura del menú original se conserva en `src/legacy-menu.json` como referencia no funcional; no hay navegación productiva ni autenticación, captura o impresión reales.
+
+
+## Refinamientos v2.1
+
+La identidad base se conserva. `src/refinements.css` centraliza las modificaciones: cuerpo y campos de 16px, títulos de tarjeta de 16px, descripciones de 14px, borde claro #7d8fa1, foco claro #286184 y selección de filas con --ds-brand-soft. Se incorpora tema Sistema, herramientas de tabla y diálogo de detalle con los mismos tokens. El tamaño tipográfico es una decisión de diseño, no un mínimo normativo de WCAG. Consultar QA.md para la validación actual.

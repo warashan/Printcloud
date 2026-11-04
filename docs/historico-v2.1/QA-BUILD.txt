@@ -1,0 +1,5 @@
+
+> printcloud-tne-design-system@2.1.0 build
+> node scripts/build.mjs
+
+Tailwind CSS compilado: 202 clases candidatas · 57752 bytes · 11 páginas

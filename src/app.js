@@ -3,6 +3,7 @@
   'use strict';
   const $ = (s, ctx = document) => ctx.querySelector(s);
   const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
+  const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const spanish = (n, singular, plural) => `${n} ${n === 1 ? singular : plural}`;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const reveal = element => {
@@ -172,10 +173,15 @@
     close.type = 'button';
     close.setAttribute('aria-label', 'Cerrar notificación');
     close.textContent = '×';
-    close.addEventListener('click', () => t.remove());
     t.setAttribute('role', 'status');
     t.append(content, close);
     zone.append(t);
+    zone.scrollTop = zone.scrollHeight;
+    close.addEventListener('click', () => {
+      const next = t.nextElementSibling?.querySelector('button') || t.previousElementSibling?.querySelector('button');
+      t.remove();
+      (next || notificationToggle || $('#mainContent'))?.focus();
+    }, { once: true });
     // WCAG 2.2: no autodescartar mensajes que una persona aún podría leer.
     // El usuario puede cerrar la notificación explícitamente.
   }
@@ -187,6 +193,60 @@
   const syncTheme = () => $$('[data-theme-choice]').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.themeChoice === window.PCTheme?.get())));
   syncTheme();
   document.addEventListener('pc:themechange', syncTheme);
+
+  /* Menú de perfil: controles nativos y navegación de teclado del patrón menu. */
+  const profileToggle = $('#profileToggle');
+  const profileMenu = $('#profileMenu');
+  const profileSettingsDialog = $('#profileSettingsDialog');
+  const profileItems = () => $$('[role="menuitem"]', profileMenu);
+  const closeProfile = (restoreFocus = false) => {
+    if (!profileMenu || profileMenu.hidden) return;
+    profileMenu.hidden = true;
+    profileToggle.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) profileToggle.focus();
+  };
+  const openProfile = (last = false) => {
+    if (!profileMenu) return;
+    closeNotifications();
+    profileMenu.hidden = false;
+    profileToggle.setAttribute('aria-expanded', 'true');
+    reveal(profileMenu);
+    const items = profileItems();
+    items[last ? items.length - 1 : 0]?.focus();
+  };
+  profileToggle?.addEventListener('click', () => profileMenu.hidden ? openProfile() : closeProfile(true));
+  profileToggle?.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      openProfile(event.key === 'ArrowUp');
+    }
+  });
+  profileMenu?.addEventListener('keydown', event => {
+    const items = profileItems();
+    const index = items.indexOf(document.activeElement);
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1
+        : (index + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+      items[next].focus();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      closeProfile(true);
+    } else if (event.key === 'Tab') {
+      closeProfile(true);
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.profile-menu')) closeProfile();
+  });
+  document.addEventListener('focusin', event => {
+    if (!event.target.closest('.profile-menu')) closeProfile();
+  });
+  $('#profileSettings')?.addEventListener('click', () => {
+    closeProfile();
+    profileSettingsDialog.showModal();
+  });
+  profileSettingsDialog?.addEventListener('close', () => profileToggle.focus());
 
   /* Menú móvil: diálogo lateral con foco gestionado, cierre y retorno al disparador. */
   const sidebar = $('#sidebar');
@@ -212,9 +272,12 @@
   });
   $$('.sidebar .nav-link').forEach(link => { link.title = link.textContent.trim(); });
   syncSidebarToggle();
-  const focusables = () => $$('.sidebar a[href], .sidebar button:not([disabled]), .sidebar summary');
+  const focusables = () => $$('.sidebar a[href], .sidebar button:not([disabled]), .sidebar input, .sidebar summary').filter(el => el.getClientRects().length && !el.closest('[hidden]'));
+  const mainWrapper = $('.main-wrapper');
+  const setBackgroundInert = value => { if (mainWrapper) mainWrapper.inert = value; };
   const closeMobile = (restore = true) => {
     const wasOpen = sidebar?.classList.contains('is-open');
+    setBackgroundInert(false);
     sidebar?.classList.remove('is-open');
     overlay?.classList.remove('is-open');
     sidebar?.removeAttribute('aria-modal');
@@ -226,6 +289,9 @@
   };
   const openMobile = () => {
     if (!sidebar || !isMobile()) return;
+    closeNotifications();
+    closeProfile();
+    setBackgroundInert(true);
     sidebar.inert = false;
     sidebar.classList.add('is-open');
     overlay?.classList.add('is-open');
@@ -255,6 +321,20 @@
     }
   });
   syncNav();
+  const menuSearch = $('#menuSearch');
+  menuSearch?.addEventListener('input', () => {
+    const term = normalize(menuSearch.value.trim());
+    let count = 0;
+    $$('.nav-details').forEach(group => {
+      if (!group.dataset.initialOpen) group.dataset.initialOpen = group.open ? 'yes' : 'no';
+      const title = normalize($('summary', group)?.textContent || '');
+      const items = $$('.subitem', group);
+      items.forEach(item => { item.hidden = Boolean(term) && !normalize(item.textContent).includes(term) && !title.includes(term); if (!item.hidden) count++; });
+      group.hidden = Boolean(term) && items.every(item => item.hidden);
+      group.open = term ? !group.hidden : group.dataset.initialOpen === 'yes';
+    });
+    $('#menuCount').textContent = term ? spanish(count, 'opción encontrada', 'opciones encontradas') : 'Inventario documental · módulos sin conexión';
+  });
 
   async function copy(text) {
     try {
@@ -262,10 +342,11 @@
     } catch (e) {
       const temp = document.createElement('textarea');
       temp.value = text; temp.style.position='fixed';temp.style.opacity='0';
+      const previousFocus = document.activeElement;
       document.body.append(temp);temp.select();
       let copied = false;
       try { copied = document.execCommand('copy'); } catch (_) {}
-      finally { temp.remove(); }
+      finally { temp.remove(); previousFocus?.focus(); }
       if (!copied) {
         toast('No se pudo copiar. Selecciona el código y cópialo manualmente.', 'warning');
         return;
@@ -276,9 +357,9 @@
   $$('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>copy(btn.dataset.copy)));
   const iconSearch = $('#iconSearch');
   iconSearch?.addEventListener('input', () => {
-    const query = iconSearch.value.trim().toLowerCase();
+    const query = normalize(iconSearch.value.trim());
     const items = $$('.icon-cell');let n=0;
-    items.forEach(item => {const show=item.dataset.copy.toLowerCase().includes(query);item.hidden=!show;if(show)n++;});
+    items.forEach(item => {const show=normalize(item.dataset.copy).includes(query);item.hidden=!show;if(show)n++;});
     if ($('#iconCount')) $('#iconCount').textContent=spanish(n,'ícono encontrado','íconos encontrados');
   });
 
@@ -319,7 +400,7 @@
     if($('#formFeedback')) $('#formFeedback').textContent='';
   };
   $('#formReset')?.addEventListener('click',resetForm);
-  $('#formSubmit')?.addEventListener('click', () => {
+  const validateDemo = () => {
     let valid=true;let firstInvalid=null;
     ['rut','folio'].forEach(id => {
       const f=$('#'+id); if(!f) return;
@@ -330,8 +411,12 @@
     if($('#formFeedback')) $('#formFeedback').textContent=valid ? 'Campos obligatorios presentes. Esta es una validación visual, no una solicitud enviada.' : 'Completa los campos marcados para continuar.';
     if(!valid)firstInvalid?.focus();
     toast(valid ? 'Validación visual completada. No se envió ningún dato.' : 'Faltan campos obligatorios.',valid?'success':'warning');
-  });
-  demoForm?.addEventListener('submit', e=>e.preventDefault());
+  };
+  demoForm?.addEventListener('submit', e => { e.preventDefault(); validateDemo(); });
+  ['rut', 'folio'].forEach(id => $('#'+id)?.addEventListener('input', event => {
+    if (event.target.value.trim()) { event.target.removeAttribute('aria-invalid'); $('#'+id+'Error').hidden = true; }
+    $('#formFeedback').textContent = '';
+  }));
 
   /* Wizard / stepper */
   const stepTitles=['Identificación del estudiante','Captura fotográfica','Validación de la información','Revisión y confirmación','Preparación de impresión'];
@@ -370,36 +455,77 @@
   $$('[data-open-dialog]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.openDialog)?.showModal()));
   $$('[data-close-dialog]').forEach(btn=>btn.addEventListener('click',()=>btn.closest('dialog')?.close()));
   $$('[data-demo-confirm]').forEach(btn=>btn.addEventListener('click',()=>{btn.closest('dialog')?.close();toast(btn.dataset.demoConfirm,'success');}));
-  $$('dialog.dialog').forEach(dialog=>dialog.addEventListener('click', e=>{if(e.target===dialog)dialog.close()}));
+  $$('dialog.dialog').forEach(dialog=>dialog.addEventListener('click', e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}}));
 
-  /* Tablas: filtro, orden, paginación y selección locales */
-  const tbody=$('#tableBody');
-  if(tbody){
-    const rows=$$('tr[data-code]',tbody);let page=1;let reverse=false;
-    const refresh=()=>{
-      const query=($('#tableSearch')?.value||'').trim().toLowerCase();
-      const status=$('#tableStatus')?.value||'';
-      const selected=rows.filter(row=>[row.dataset.code,row.children[2].textContent,row.children[3].textContent].some(text=>text.toLowerCase().includes(query))&&(!status||row.dataset.status===status)).sort((a,b)=>reverse?b.dataset.code.localeCompare(a.dataset.code):a.dataset.code.localeCompare(b.dataset.code));
-      const size=Number($('#pageSize').value)||10;const pages=Math.max(1,Math.ceil(selected.length/size));page=Math.min(page,pages);
-      rows.forEach(row=>row.hidden=true);
-      selected.slice((page-1)*size,page*size).forEach(row=>{row.hidden=false;tbody.append(row);});
-      const pager=$('#tablePagination');pager.replaceChildren();
-      function pageButton(label,n,disabled,active){const b=document.createElement('button');b.className='page-btn';b.textContent=label;b.disabled=disabled;b.type='button';b.setAttribute('aria-label',label==='‹'?'Página anterior':label==='›'?'Página siguiente':'Página '+label);if(active)b.setAttribute('aria-current','page');b.addEventListener('click',()=>{page=n;refresh();});pager.append(b);}
-      pageButton('‹',page-1,page===1,false);
-      for(let n=1;n<=pages;n++) pageButton(String(n),n,false,n===page);
-      pageButton('›',page+1,page===pages,false);
-      const start=selected.length?(page-1)*size+1:0;const end=Math.min(page*size,selected.length);
-      $('#tableCount').textContent=`Mostrando ${start}–${end} de ${selected.length}`;
-      $('#tableEmpty').hidden=selected.length!==0;
-      $('#selectAll').checked=false;
+  /* Tabla: selección persistente entre páginas, detalle y CSV locales. */
+  const tbody = $('#tableBody');
+  if (tbody) {
+    const rows = $$('tr[data-code]', tbody);
+    let page = 1, reverse = false, filtered = [];
+    const checked = row => $('.table-select', row).checked;
+    const visibleRows = () => rows.filter(row => !row.hidden);
+    const syncSelection = () => {
+      const visible = visibleRows(), marked = visible.filter(checked).length;
+      $('#selectAll').checked = visible.length > 0 && marked === visible.length;
+      $('#selectAll').indeterminate = marked > 0 && marked < visible.length;
+      $('#selectAll').disabled = visible.length === 0;
+      const n = rows.filter(checked).length;
+      $('#selectionCount').textContent = spanish(n, 'seleccionada', 'seleccionadas');
+      $('#clearSelection').disabled = n === 0;
+      const exportable = filtered.filter(checked).length;
+      $('#exportTable').textContent = exportable ? `Exportar selección (${exportable})` : `Exportar resultados (${filtered.length})`;
+      $('#exportTable').disabled = filtered.length === 0;
+      rows.forEach(row => row.classList.toggle('is-selected', checked(row)));
     };
-    $('#tableSearch')?.addEventListener('input',()=>{page=1;refresh()});
-    $('#tableStatus')?.addEventListener('change',()=>{page=1;refresh()});
-    $('#pageSize')?.addEventListener('change',()=>{page=1;refresh()});
-    $('#sortCode')?.addEventListener('click',()=>{reverse=!reverse;const th=$('#sortCode')?.closest('th');if(th)th.setAttribute('aria-sort',reverse?'descending':'ascending');refresh();});
-    $('#selectAll')?.addEventListener('change',e=>{$$('tr:not([hidden]) .table-select',tbody).forEach(el=>el.checked=e.target.checked)});
-    tbody.addEventListener('click',e=>{const btn=e.target.closest('.table-detail');if(btn)toast(`Detalle de ${btn.dataset.code} (demostración).`,'info');});
-    $('#exportTable')?.addEventListener('click',()=>toast('Exportación no disponible: datos de demostración.','info'));
+    const refresh = () => {
+      const query = normalize($('#tableSearch').value.trim());
+      const status = $('#tableStatus').value;
+      filtered = rows.filter(row => [row.dataset.code, row.children[2].textContent, row.children[3].textContent].some(text => normalize(text).includes(query)) && (!status || row.dataset.status === status))
+        .sort((a,b) => reverse ? b.dataset.code.localeCompare(a.dataset.code) : a.dataset.code.localeCompare(b.dataset.code));
+      const size = Number($('#pageSize').value) || 10;
+      const pages = Math.max(1, Math.ceil(filtered.length/size)); page = Math.min(page,pages);
+      rows.forEach(row => row.hidden = true);
+      filtered.slice((page-1)*size,page*size).forEach(row => {row.hidden=false;tbody.append(row);});
+      const pager = $('#tablePagination'); pager.replaceChildren();
+      const pageButton = (label,n,disabled,active) => {
+        const b=document.createElement('button'); b.className='page-btn'; b.textContent=label; b.type='button'; b.disabled=disabled;
+        b.setAttribute('aria-label', label==='‹'?'Página anterior':label==='›'?'Página siguiente':'Página '+label);
+        if(active)b.setAttribute('aria-current','page');
+        b.addEventListener('click',()=>{page=n;refresh();$('#tablePagination [aria-current="page"]')?.focus();});pager.append(b);
+      };
+      pageButton('‹',page-1,page===1,false);
+      for(let n=1;n<=pages;n++)pageButton(String(n),n,false,n===page);
+      pageButton('›',page+1,page===pages,false);
+      const start=filtered.length?(page-1)*size+1:0, end=Math.min(page*size,filtered.length);
+      $('#tableCount').textContent=`Mostrando ${start}–${end} de ${filtered.length}`;
+      $('#tableEmpty').hidden=filtered.length!==0;
+      syncSelection();
+    };
+    ['tableSearch','tableStatus','pageSize'].forEach(id=>$('#'+id).addEventListener(id==='tableSearch'?'input':'change',()=>{page=1;refresh();}));
+    $('#clearTableFilters').addEventListener('click',()=>{$('#tableSearch').value='';$('#tableStatus').value='';page=1;refresh();$('#tableSearch').focus();});
+    $('#sortCode').closest('th').setAttribute('aria-sort','ascending');
+    $('#sortCode').addEventListener('click',()=>{reverse=!reverse;$('#sortCode').closest('th').setAttribute('aria-sort',reverse?'descending':'ascending');refresh();});
+    $('#selectAll').addEventListener('change',e=>{visibleRows().forEach(row=>$('.table-select',row).checked=e.target.checked);syncSelection();});
+    tbody.addEventListener('change',syncSelection);
+    $('#clearSelection').addEventListener('click',()=>{rows.forEach(row=>$('.table-select',row).checked=false);syncSelection();$('#selectAll').focus();});
+    tbody.addEventListener('click',e=>{
+      const btn=e.target.closest('.table-detail'); if(!btn)return;
+      const row=btn.closest('tr');
+      $('#tableDetailTitle').textContent=row.dataset.code;
+      const list=$('#tableDetailFields'); list.replaceChildren();
+      ['Solicitud','Tipo','Oficina','Estado','Fecha'].forEach((label,i)=>{
+        const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=row.children[i+1].textContent.trim();list.append(dt,dd);
+      });
+      $('#tableDetailDialog').showModal();
+    });
+    $('#exportTable').addEventListener('click',()=>{
+      const marked=filtered.filter(checked), data=marked.length?marked:filtered;
+      const cell=value=>'"'+String(value).replace(/"/g,'""')+'"';
+      const lines=[['Solicitud','Tipo','Oficina','Estado','Fecha'],...data.map(row=>[1,2,3,4,5].map(i=>row.children[i].textContent.trim()))];
+      const blob=new Blob(['\uFEFF'+lines.map(line=>line.map(cell).join(';')).join('\r\n')],{type:'text/csv;charset=utf-8;'});
+      const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='PrintCloud-solicitudes-demo.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      toast(`CSV preparado con ${spanish(data.length,'solicitud de ejemplo','solicitudes de ejemplo')}.`,'success');
+    });
     refresh();
   }
 
@@ -408,17 +534,19 @@
   if(searchDemo){
     const items=$$('.search-result');
     function filterResults(){
-      const term=$('#searchTerm').value.trim().toLowerCase();const type=$('#searchType').value;const status=$('#searchStatus').value;
+      const term=normalize($('#searchTerm').value.trim());const type=$('#searchType').value;const status=$('#searchStatus').value;
       let count=0;items.forEach(item=>{
-        const found=[item.dataset.code,item.dataset.kind,item.dataset.office].some(v=>v.toLowerCase().includes(term));
+        const found=[item.dataset.code,item.dataset.kind,item.dataset.office].some(v=>normalize(v).includes(term));
         const show=found&&(!type||item.dataset.kind===type)&&(!status||item.dataset.status===status);
         item.hidden=!show;if(show)count++;
       });
       $('#searchCount').textContent=spanish(count,'solicitud encontrada','solicitudes encontradas');
       $('#searchEmpty').hidden=count!==0;
       const chips=$('#activeFilters');chips.replaceChildren();
-      for(const value of [term&&`Texto: ${term}`,type&&`Tipo: ${type}`,status&&`Estado: ${status}`].filter(Boolean)){
-        const ch=document.createElement('span');ch.className='filter-chip';ch.textContent=value;chips.append(ch);
+      for(const [id,label] of [['searchTerm','Texto'],['searchType','Tipo'],['searchStatus','Estado']]) {
+        const value=$('#'+id).value.trim(); if(!value)continue;
+        const ch=document.createElement('button');ch.type='button';ch.className='filter-chip';ch.textContent=`${label}: ${value} ×`;ch.setAttribute('aria-label',`Quitar filtro ${label}: ${value}`);
+        ch.addEventListener('click',()=>{$('#'+id).value='';filterResults();$('#'+id).focus();});chips.append(ch);
       }
     }
     searchDemo.addEventListener('submit',e=>{e.preventDefault();filterResults()});
@@ -429,12 +557,45 @@
     window.addEventListener('keydown',e=>{
       if(e.key==='/'&&!(e.target.closest('input,textarea,select,[contenteditable]'))){e.preventDefault();$('#searchTerm').focus();}
     });
+    $('#searchSimple')?.addEventListener('input', event => {$('#searchTerm').value=event.target.value;filterResults();});
     filterResults();
   }
 
   $$('[data-dismiss-alert]').forEach(button=>button.addEventListener('click',()=>button.closest('.alert')?.remove()));
   const toastText={success:'La operación de prueba finalizó correctamente.',info:'Se ha generado una notificación informativa.',warning:'Revisa la información antes de continuar.',danger:'No fue posible completar la acción de demostración.'};
   $$('[data-toast]').forEach(button=>button.addEventListener('click',()=>toast(toastText[button.dataset.toast],button.dataset.toast)));
+
+  /* Carrusel informativo manual: conserva el foco en el control utilizado. */
+  const loginCarousel = $('#loginCarousel');
+  if (loginCarousel) {
+    const slides = $$('[data-login-slide]', loginCarousel);
+    const indicators = $$('[data-login-go]', loginCarousel);
+    let current = 0;
+    const showLoginSlide = (index, announce = true) => {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, position) => {
+        const active = position === current;
+        slide.hidden = !active;
+        slide.toggleAttribute('inert', !active);
+        slide.setAttribute('aria-hidden', String(!active));
+        slide.classList.remove('is-entering');
+        if (active && announce && !reducedMotion.matches) slide.classList.add('is-entering');
+      });
+      indicators.forEach((button, position) => button.setAttribute('aria-pressed', String(position === current)));
+      $('#loginSlideCount').textContent = `${current + 1} de ${slides.length}`;
+      if (announce) {
+        const title = $('h3', slides[current]).textContent.trim();
+        $('#loginSlideStatus').textContent = `Característica ${current + 1} de ${slides.length}: ${title}`;
+      }
+    };
+    if (slides.length) {
+      $$('.login-carousel-controls button', loginCarousel).forEach(button => { button.disabled = false; });
+      $('#loginSlidePrev').addEventListener('click', () => showLoginSlide(current - 1));
+      $('#loginSlideNext').addEventListener('click', () => showLoginSlide(current + 1));
+      indicators.forEach(button => button.addEventListener('click', () => showLoginSlide(Number(button.dataset.loginGo))));
+      showLoginSlide(0, false);
+    }
+  }
 
   /* Login visual: NO simula autenticación exitosa ni guarda credenciales. */
   const loginForm=$('#loginDemo');

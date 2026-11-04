@@ -1,0 +1,125 @@
+{
+  "scope": "Pares seleccionados; no incluye todos los estados ni certifica conformidad.",
+  "pairs": [
+    {
+      "pair": "Foco claro / blanco",
+      "foreground": "#286184",
+      "background": "#ffffff",
+      "ratio": 6.7,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Borde de campo claro / blanco",
+      "foreground": "#7d8fa1",
+      "background": "#ffffff",
+      "ratio": 3.33,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Texto botón primario",
+      "foreground": "#ffffff",
+      "background": "#3c759f",
+      "ratio": 4.96,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Título slider / extremo más claro del gradiente",
+      "foreground": "#ffffff",
+      "background": "#344f70",
+      "ratio": 8.41,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Descripción slider / extremo más claro del gradiente",
+      "foreground": "#e0ecf5",
+      "background": "#344f70",
+      "ratio": 7.0,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Texto auxiliar slider / extremo más claro del gradiente",
+      "foreground": "#d3e4f1",
+      "background": "#344f70",
+      "ratio": 6.46,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Texto de visualización / panel",
+      "foreground": "#edf5fb",
+      "background": "#1e334e",
+      "ratio": 11.63,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Texto de estado / fondo de estado",
+      "foreground": "#edf5fb",
+      "background": "#2b4865",
+      "ratio": 8.59,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Borde del estado / fondo de estado",
+      "foreground": "#87a9c5",
+      "background": "#2b4865",
+      "ratio": 3.84,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Borde de controles / extremo más claro del gradiente",
+      "foreground": "#9bbad2",
+      "background": "#344f70",
+      "ratio": 4.14,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Indicador inactivo / extremo más claro del gradiente",
+      "foreground": "#92adc5",
+      "background": "#344f70",
+      "ratio": 3.6,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Foco slider / extremo más claro del gradiente",
+      "foreground": "#b9e0ff",
+      "background": "#344f70",
+      "ratio": 6.07,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Foco navegación / sidebar",
+      "foreground": "#b9e0ff",
+      "background": "#20334d",
+      "ratio": 9.24,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Texto en tema oscuro",
+      "foreground": "#f0f5fb",
+      "background": "#172638",
+      "ratio": 13.98,
+      "threshold": 4.5,
+      "pass": true
+    },
+    {
+      "pair": "Borde campo oscuro",
+      "foreground": "#829ab1",
+      "background": "#172638",
+      "ratio": 5.26,
+      "threshold": 3,
+      "pass": true
+    }
+  ]
+}

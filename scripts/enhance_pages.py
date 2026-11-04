@@ -146,7 +146,9 @@ def enhance_all(root: Path):
       old.attrs.pop('onmouseenter',None);old.attrs.pop('onmouseleave',None)
       old['class']=list(dict.fromkeys(old.get('class',[])+['hover-lift']))
     file.write_text(str(soup),encoding='utf-8')
-  print('Brand + accessibility enhancements applied to all HTML files.')
+  from refine_pages import refine_all
+  refine_all(root)
+  print('Brand + accessibility + v2.1 refinements applied to all HTML files.')
 
 if __name__=='__main__':
   enhance_all(Path(__file__).resolve().parents[1])

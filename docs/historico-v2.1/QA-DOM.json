@@ -1,0 +1,113 @@
+{
+  "environment": "Node + jsdom 26; DOM simulado, sin layout ni motor de navegador",
+  "results": [
+    {
+      "name": "Inicialización alertas.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización buscadores.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización formularios.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización iconos.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización index.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización loaders.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización login.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización modales.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización steppers.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización tablas.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inicialización tipografia.html",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Tabla: 26 registros y paginación inicial",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Seleccionar visibles y selección parcial",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Conservar selección al paginar",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Limpiar selección",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Filtro ignora tildes",
+      "status": "Aprobado"
+    },
+    {
+      "name": "CSV contiene resultados filtrados",
+      "status": "Aprobado"
+    },
+    {
+      "name": "CSV de selección exporta solo seleccionadas filtradas",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Detalle coincide con fila",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sin resultados y restauración",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Orden descendente anunciado",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Formulario: envío por evento submit valida vacíos",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Corregir campos limpia error y valida",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Limpiar formulario restablece feedback",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Buscador: texto sin tildes y chips removibles",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Tema del sistema persiste y sigue cambios del SO",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Inventario: filtra y restaura módulos",
+      "status": "Aprobado"
+    }
+  ]
+}

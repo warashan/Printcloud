@@ -1,0 +1,82 @@
+[
+  {
+    "pair": "Texto claro",
+    "foreground": "#24374f",
+    "background": "#ffffff",
+    "ratio": 12.11,
+    "threshold": 4.5,
+    "passed": true
+  },
+  {
+    "pair": "Secundario claro",
+    "foreground": "#53677d",
+    "background": "#ffffff",
+    "ratio": 5.83,
+    "threshold": 4.5,
+    "passed": true
+  },
+  {
+    "pair": "Bot\u00f3n primario",
+    "foreground": "#ffffff",
+    "background": "#3c759f",
+    "ratio": 4.96,
+    "threshold": 4.5,
+    "passed": true
+  },
+  {
+    "pair": "Foco claro",
+    "foreground": "#286184",
+    "background": "#ffffff",
+    "ratio": 6.7,
+    "threshold": 3,
+    "passed": true
+  },
+  {
+    "pair": "Borde claro",
+    "foreground": "#7d8fa1",
+    "background": "#ffffff",
+    "ratio": 3.33,
+    "threshold": 3,
+    "passed": true
+  },
+  {
+    "pair": "Texto oscuro",
+    "foreground": "#f0f5fb",
+    "background": "#172638",
+    "ratio": 13.98,
+    "threshold": 4.5,
+    "passed": true
+  },
+  {
+    "pair": "Secundario oscuro",
+    "foreground": "#a7bdd1",
+    "background": "#172638",
+    "ratio": 7.91,
+    "threshold": 4.5,
+    "passed": true
+  },
+  {
+    "pair": "Foco oscuro",
+    "foreground": "#9bd2f5",
+    "background": "#172638",
+    "ratio": 9.43,
+    "threshold": 3,
+    "passed": true
+  },
+  {
+    "pair": "Borde oscuro",
+    "foreground": "#829ab1",
+    "background": "#172638",
+    "ratio": 5.26,
+    "threshold": 3,
+    "passed": true
+  },
+  {
+    "pair": "Foco sidebar",
+    "foreground": "#b9e0ff",
+    "background": "#20334d",
+    "ratio": 9.24,
+    "threshold": 3,
+    "passed": true
+  }
+]
