@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="light dark" name="color-scheme"/>
+  <title>
+   Dashboard · PrintCloud Design System
+  </title>
+  <script src="src/theme-init.js">
+  </script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="dist/styles.css" rel="stylesheet"/>
+  <link href="assets/brand/favicon.png" rel="icon" type="image/png"/>
+  <link href="src/refinements.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip-link" href="#mainContent">
+   Saltar al contenido principal
+  </a>
+  <div aria-hidden="true" class="mobile-overlay" id="mobileOverlay">
+  </div>
+  <div class="app-layout">
+   <aside aria-label="Navegación del sistema" class="sidebar" id="sidebar" tabindex="-1">
+    <button aria-label="Cerrar menú" class="sidebar-close icon-btn" id="sidebarClose" type="button">
+     ×
+    </button>
+    <a class="brand" href="index.html">
+     <picture aria-hidden="true" class="brand-picture">
+      <img alt="" class="brand-wordmark" height="241" src="assets/brand/printcloud_blanco.png" width="1001"/>
+     </picture>
+     <img alt="" class="brand-symbol" height="38" src="assets/brand/favicon.png" width="38"/>
+     <span class="sr-only">
+      PrintCloud by Concordia — Biblioteca de componentes
+     </span>
+    </a>
+    <div class="nav-heading">
+     Páginas de prueba
+    </div>
+    <nav aria-label="Páginas de prueba">
+     <a aria-current="page" class="nav-link" href="dashboard.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+       <rect height="9" rx="1" width="7" x="3" y="3">
+       </rect>
+       <rect height="5" rx="1" width="7" x="14" y="3">
+       </rect>
+       <rect height="9" rx="1" width="7" x="14" y="12">
+       </rect>
+       <rect height="5" rx="1" width="7" x="3" y="16">
+       </rect>
+      </svg>
+      <span>
+       Dashboard
+      </span>
+     </a>
+    </nav>
+    <div class="nav-heading">
+     Sistema de diseño
+    </div>
+    <nav aria-label="Páginas de la biblioteca">
+     <a class="nav-link" href="index.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <rect height="7" rx="1" width="7" x="3" y="3">
+       </rect>
+       <rect height="7" rx="1" width="7" x="14" y="3">
+       </rect>
+       <rect height="7" rx="1" width="7" x="3" y="14">
+       </rect>
+       <rect height="7" rx="1" width="7" x="14" y="14">
+       </rect>
+      </svg>
+      <span>
+       Matriz de elementos
+      </span>
+     </a>
+     <a class="nav-link" href="tipografia.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M4 7V4h16v3M12 4v16m-5 0h10">
+       </path>
+      </svg>
+      <span>
+       Tipografía
+      </span>
+     </a>
+     <a class="nav-link" href="iconos.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <rect height="8" rx="1" width="8" x="3" y="3">
+       </rect>
+       <circle cx="17" cy="7" r="4">
+       </circle>
+       <path d="m7 21 5-9 5 9H7Z">
+       </path>
+      </svg>
+      <span>
+       Iconografía
+      </span>
+     </a>
+     <a class="nav-link" href="loaders.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M20 11a8 8 0 0 0-14-5L4 8M4 4v4h4M4 13a8 8 0 0 0 14 5l2-2m0 4v-4h-4">
+       </path>
+      </svg>
+      <span>
+       Loaders y spinners
+      </span>
+     </a>
+     <a class="nav-link" href="formularios.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <rect height="16" rx="2" width="18" x="3" y="4">
+       </rect>
+       <path d="M7 9h10M7 13h7">
+       </path>
+      </svg>
+      <span>
+       Formularios
+      </span>
+     </a>
+     <a class="nav-link" href="steppers.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h3M4 15h3l-3 4h3">
+       </path>
+      </svg>
+      <span>
+       Steppers
+      </span>
+     </a>
+     <a class="nav-link" href="modales.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <rect height="18" rx="2" width="18" x="3" y="3">
+       </rect>
+       <path d="M3 9h18M9 9v12">
+       </path>
+      </svg>
+      <span>
+       Modales
+      </span>
+     </a>
+     <a class="nav-link" href="tablas.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <rect height="18" rx="2" width="18" x="3" y="3">
+       </rect>
+       <path d="M3 9h18M3 15h18M9 3v18">
+       </path>
+      </svg>
+      <span>
+       Tablas y paginación
+      </span>
+     </a>
+     <a class="nav-link" href="buscadores.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <circle cx="11" cy="11" r="7">
+       </circle>
+       <path d="m20 20-4-4">
+       </path>
+      </svg>
+      <span>
+       Buscadores
+      </span>
+     </a>
+     <a class="nav-link" href="alertas.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4">
+       </path>
+      </svg>
+      <span>
+       Alertas
+      </span>
+     </a>
+     <a class="nav-link" href="login.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7M3 12h13m-5-5 5 5-5 5">
+       </path>
+      </svg>
+      <span>
+       Login / acceso
+      </span>
+     </a>
+    </nav>
+    <div class="nav-heading">
+     Mapa de menús existentes
+    </div>
+    <div style="padding:0 4px">
+     <p style="font-size:10px;color:#9db6ca;padding:0 12px 8px;line-height:1.5">
+      Estructura recuperada del HTML original. Referencia sin rutas de producción.
+     </p>
+     <div class="menu-search">
+      <label class="label" for="menuSearch">
+       Buscar módulo del inventario
+      </label>
+      <input aria-describedby="menuCount" class="field" id="menuSearch" placeholder="Nombre de módulo…" type="search"/>
+      <p class="field-hint" id="menuCount" role="status">
+       Inventario documental · módulos sin conexión
+      </p>
+     </div>
+     <details class="nav-details">
+      <summary>
+       Dashboards
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Dashboard Centralizado
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Reposiciones
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Solicitudes de reposición
+      </div>
+      <div class="subitem">
+       Reposiciones INSITU
+      </div>
+      <div class="subitem">
+       Depósitos
+      </div>
+      <div class="subitem">
+       Transferencias
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Impresiones Centralizado
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Ingreso de tarjetas centralizadas
+      </div>
+      <div class="subitem">
+       Impresión centralizada
+      </div>
+      <div class="subitem">
+       Sobres centralizados
+      </div>
+      <div class="subitem">
+       Mermas de tarjetas centralizadas
+      </div>
+      <div class="subitem">
+       Recepción de tarjetas para impresión
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Captura Fotográfica
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Captura fotográfica
+      </div>
+      <div class="subitem">
+       Revisión de capturas
+      </div>
+      <div class="subitem">
+       Revisión de capturas centralizadas
+      </div>
+      <div class="subitem">
+       Revisión de capturas INSITU
+      </div>
+      <div class="subitem">
+       Inspección de capturas
+      </div>
+      <div class="subitem">
+       Administración de edición fotográfica
+      </div>
+      <div class="subitem">
+       Edición fotográfica
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Revalidacion
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Base de revalidaciones
+      </div>
+      <div class="subitem">
+       Entrega de sellos
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Otras Atenciones
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Activación de tarjetas
+      </div>
+      <div class="subitem">
+       Actualización de datos
+      </div>
+      <div class="subitem">
+       Revisión de actualizaciones
+      </div>
+      <div class="subitem">
+       Carga SIGE
+      </div>
+      <div class="subitem">
+       Revisión de cargas SIGE
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Entregas TNE
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Entrega de tarjetas nuevas
+      </div>
+      <div class="subitem">
+       Entrega de tarjetas centralizadas
+      </div>
+      <div class="subitem">
+       Entrega de tarjetas INSITU
+      </div>
+      <div class="subitem">
+       Entrega de tarjetas normales
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Stock
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Asignaciones de folios
+      </div>
+      <div class="subitem">
+       Asignaciones de folios INSITU
+      </div>
+      <div class="subitem">
+       Consulta de lotes asignados
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Stock Temporales
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Lotes de tarjetas temporales
+      </div>
+      <div class="subitem">
+       Asignar lotes temporales a oficina
+      </div>
+      <div class="subitem">
+       Préstamo de tarjetas temporales
+      </div>
+      <div class="subitem">
+       Cambio de tarjeta temporal
+      </div>
+      <div class="subitem">
+       Consulta de tarjetas temporales
+      </div>
+      <div class="subitem">
+       Arqueo de tarjetas temporales
+      </div>
+      <div class="subitem">
+       Arqueo de temporales bloqueadas
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Stock Nuevos
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Carga de tarjetas nuevas
+      </div>
+      <div class="subitem">
+       Recepción de tarjetas nuevas
+      </div>
+      <div class="subitem">
+       Asignar tarjetas nuevas a oficina
+      </div>
+      <div class="subitem">
+       Arqueo de tarjetas nuevas
+      </div>
+      <div class="subitem">
+       Carga de tarjetas normales
+      </div>
+      <div class="subitem">
+       Carga de tarjetas centralizadas
+      </div>
+      <div class="subitem">
+       Asignar tarjetas normales a oficina
+      </div>
+      <div class="subitem">
+       Asignar tarjetas centralizadas a oficina
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Stock InSitu
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Lotes de tarjetas INSITU
+      </div>
+      <div class="subitem">
+       Asignar tarjetas INSITU a oficina
+      </div>
+      <div class="subitem">
+       Mermas y robos de tarjetas INSITU
+      </div>
+      <div class="subitem">
+       Máquinas INSITU por sucursal
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Stock Sellos
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Carga de sellos
+      </div>
+      <div class="subitem">
+       Asignar sellos a oficina
+      </div>
+      <div class="subitem">
+       Asignación diaria de sellos
+      </div>
+      <div class="subitem">
+       Mermas y robos de sellos
+      </div>
+      <div class="subitem">
+       Consulta y stock de sellos
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Encuesta
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Procesos de encuesta
+      </div>
+      <div class="subitem">
+       Resultados de encuestas
+      </div>
+      <div class="subitem">
+       Rendimiento de encuestas
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Reportes
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Reporte consolidado
+      </div>
+      <div class="subitem">
+       Reporte desagrupado
+      </div>
+      <div class="subitem">
+       Historial de reportes
+      </div>
+      <div class="subitem">
+       Reporte mensual
+      </div>
+      <div class="subitem">
+       Reporte de entregas centralizadas
+      </div>
+      <div class="subitem">
+       Reporte de entregas INSITU
+      </div>
+      <div class="subitem">
+       Stock de tarjetas centralizadas
+      </div>
+      <div class="subitem">
+       Stock CENTRALIZADO
+      </div>
+      <div class="subitem">
+       Stock de tarjetas nuevas
+      </div>
+      <div class="subitem">
+       Stock de tarjetas INSITU
+      </div>
+      <div class="subitem">
+       Stock de tarjetas normales
+      </div>
+      <div class="subitem">
+       Reporte de atención presencial
+      </div>
+      <div class="subitem">
+       Reporte de atención remota
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Gestión de Atención
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Configuración de horarios de atención
+      </div>
+      <div class="subitem">
+       Reservas de atención
+      </div>
+      <div class="subitem">
+       Listado de reservas de atención
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Administración
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Administrar usuarios
+      </div>
+      <div class="subitem">
+       Crear y editar grupos
+      </div>
+      <div class="subitem">
+       Privilegios de grupo
+      </div>
+      <div class="subitem">
+       Opciones de bloqueo de usuarios
+      </div>
+      <div class="subitem">
+       Bancos
+      </div>
+      <div class="subitem">
+       Establecimientos
+      </div>
+      <div class="subitem">
+       Credenciales API
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Configuraciones
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Plantillas de documentos
+      </div>
+      <div class="subitem">
+       Plantillas de correo
+      </div>
+      <div class="subitem">
+       Trámites
+      </div>
+      <div class="subitem">
+       Documentos
+      </div>
+      <div class="subitem">
+       Documentos por trámite
+      </div>
+      <div class="subitem">
+       Tipos de trámite y procesos
+      </div>
+      <div class="subitem">
+       Asignar trámites a ejecutivos
+      </div>
+      <div class="subitem">
+       Asignar trámites a oficinas
+      </div>
+      <div class="subitem">
+       Configuración de tareas programadas
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Atenciones
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Gestor documental
+      </div>
+      <div class="subitem">
+       Documentos temporales
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Atención Mesa Presencial
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Configurar horarios presenciales
+      </div>
+      <div class="subitem">
+       Asignar turnos presenciales
+      </div>
+      <div class="subitem">
+       Reservar atención presencial
+      </div>
+      <div class="subitem">
+       Reservas presenciales
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Atención Mesa Remota
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Configurar horarios remotos
+      </div>
+      <div class="subitem">
+       Asignar turnos remotos
+      </div>
+      <div class="subitem">
+       Reservar atención remota
+      </div>
+      <div class="subitem">
+       Reservas remotas
+      </div>
+      <div class="subitem">
+       Atenciones remotas (demo)
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       RRHH
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Documentos de RRHH
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Beca Indigena
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Beca indígena
+      </div>
+      <div class="subitem">
+       Actas de beca indígena
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       Kioscos
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Kioscos
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       MODO MATRIX
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Sin submenús en el HTML suministrado
+      </div>
+     </details>
+     <details class="nav-details">
+      <summary>
+       SuperAdmin
+       <svg aria-hidden="true" class="icon icon-sm chevron" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="m9 18 6-6-6-6">
+        </path>
+       </svg>
+      </summary>
+      <div class="subitem">
+       Config. de Cuenta
+      </div>
+      <div class="subitem">
+       Config. de Menús
+      </div>
+     </details>
+    </div>
+    <div class="sidebar-note">
+     <img alt="" class="sidebar-note-icon" height="42" src="assets/brand/favicon.png" width="42"/>
+     <svg aria-hidden="true" class="icon icon-sm" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z">
+      </path>
+      <path d="m8 12 3 3 5-5">
+      </path>
+     </svg>
+     <b>
+      Biblioteca UI v2.0
+     </b>
+     <br/>
+     Propuesta independiente de Bootstrap. No conecta con datos reales ni imprime tarjetas.
+    </div>
+   </aside>
+   <div class="main-wrapper">
+    <header class="topbar">
+     <div class="topbar-left">
+      <button aria-controls="sidebar" aria-expanded="true" aria-label="Contraer menú lateral" class="icon-btn sidebar-toggle" id="sidebarToggle" title="Contraer menú lateral" type="button">
+       <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect height="18" rx="2" width="18" x="3" y="3">
+        </rect>
+        <path d="M9 3v18m7-13-4 4 4 4">
+        </path>
+       </svg>
+      </button>
+      <button aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menú" class="icon-btn mobile-menu" id="menuToggle" type="button">
+       <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6h16M4 12h16M4 18h16">
+        </path>
+       </svg>
+      </button>
+      <div>
+       <div class="breadcrumb">
+        Diseño de producto / PrintCloud
+       </div>
+       <div class="topbar-name">
+        Dashboard
+       </div>
+      </div>
+     </div>
+     <div class="topbar-right">
+      <div class="notification-center">
+       <button aria-controls="notificationPanel" aria-expanded="false" aria-label="Notificaciones" class="icon-btn notification-toggle" id="notificationToggle" title="Notificaciones" type="button">
+        <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4">
+         </path>
+        </svg>
+        <span aria-hidden="true" class="notification-count" hidden="" id="notificationCount">
+        </span>
+       </button>
+       <section aria-labelledby="notificationTitle" class="notification-panel" hidden="" id="notificationPanel">
+        <div class="notification-header">
+         <h2 class="card-title" id="notificationTitle">
+          Notificaciones
+         </h2>
+         <button aria-label="Cerrar historial de notificaciones" class="icon-btn" id="notificationClose" type="button">
+          ×
+         </button>
+        </div>
+        <p class="notification-empty" id="notificationEmpty">
+         No tienes notificaciones guardadas.
+        </p>
+        <ol class="notification-list" id="notificationList">
+        </ol>
+        <div class="notification-footer">
+         <button class="btn btn-ghost btn-sm" disabled="" id="notificationClear" type="button">
+          Vaciar historial
+         </button>
+        </div>
+       </section>
+      </div>
+      <div aria-label="Apariencia" class="theme-wrap" role="group">
+       <button aria-label="Tema claro" aria-pressed="false" class="theme-btn" data-theme-choice="light" title="Tema claro" type="button">
+        <svg aria-hidden="true" class="icon icon-sm" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <circle cx="12" cy="12" r="4">
+         </circle>
+         <path d="M12 2v2M12 20v2M4.93 4.93l1.4 1.4m11.34 11.34 1.4 1.4M2 12h2m16 0h2M4.93 19.07l1.4-1.4M17.67 6.33l1.4-1.4">
+         </path>
+        </svg>
+       </button>
+       <button aria-label="Tema oscuro" aria-pressed="false" class="theme-btn" data-theme-choice="dark" title="Tema oscuro" type="button">
+        <svg aria-hidden="true" class="icon icon-sm" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M20.9 13A9 9 0 0 1 11 3.1a9 9 0 1 0 9.9 9.9Z">
+         </path>
+        </svg>
+       </button>
+       <button aria-label="Tema del sistema" aria-pressed="false" class="theme-btn theme-system" data-theme-choice="system" title="Tema del sistema" type="button">
+        <svg aria-hidden="true" class="icon icon-sm" viewbox="0 0 24 24">
+         <rect height="13" rx="2" width="18" x="3" y="3">
+         </rect>
+         <path d="M8 21h8M12 16v5">
+         </path>
+        </svg>
+       </button>
+      </div>
+      <div class="profile-menu">
+       <button aria-controls="profileMenu" aria-expanded="false" aria-haspopup="menu" aria-label="Abrir menú de perfil de PrintCloud" class="avatar profile-toggle" id="profileToggle" type="button">
+        PC
+       </button>
+       <div aria-labelledby="profileToggle" class="profile-dropdown" hidden="" id="profileMenu" role="menu">
+        <button class="profile-menu-item" id="profileSettings" role="menuitem" tabindex="-1" type="button">
+         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+          <path d="M4 7h8m4 0h4M4 17h4m4 0h8">
+          </path>
+          <circle cx="14" cy="7" r="2">
+          </circle>
+          <circle cx="10" cy="17" r="2">
+          </circle>
+         </svg>
+         Configuración
+        </button>
+        <a class="profile-menu-item profile-menu-logout" href="login.html" role="menuitem" tabindex="-1">
+         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+          <path d="M9 4H4v16h5M13 8l4 4-4 4M8 12h13">
+          </path>
+         </svg>
+         Cerrar sesión
+        </a>
+       </div>
+      </div>
+      <dialog aria-describedby="profileSettingsDescription" aria-labelledby="profileSettingsTitle" class="dialog profile-settings-dialog" id="profileSettingsDialog">
+       <div class="dialog-header">
+        <h2 class="section-title" id="profileSettingsTitle">
+         Configuración
+        </h2>
+        <button aria-label="Cerrar configuración" class="icon-btn" data-close-dialog="" type="button">
+         ×
+        </button>
+       </div>
+       <div class="dialog-content">
+        <p class="card-detail" id="profileSettingsDescription">
+         Personaliza la apariencia de PrintCloud. Tu preferencia se guarda en este navegador.
+        </p>
+        <p class="label" id="profileAppearanceTitle">
+         Apariencia
+        </p>
+        <div aria-labelledby="profileAppearanceTitle" class="profile-theme-options" role="group">
+         <button aria-pressed="false" class="btn btn-secondary" data-theme-choice="light" type="button">
+          Claro
+         </button>
+         <button aria-pressed="false" class="btn btn-secondary" data-theme-choice="dark" type="button">
+          Oscuro
+         </button>
+         <button aria-pressed="false" class="btn btn-secondary" data-theme-choice="system" type="button">
+          Sistema
+         </button>
+        </div>
+       </div>
+       <div class="dialog-footer">
+        <button class="btn btn-primary" data-close-dialog="" type="button">
+         Listo
+        </button>
+       </div>
+      </dialog>
+     </div>
+    </header>
+    <main class="main-content dashboard-page" id="mainContent" tabindex="-1">
+     <header class="page-header">
+      <div>
+       <div class="eyebrow">
+        TNE CENTRALIZADO
+        <span style="opacity:.5">
+         /
+        </span>
+        SISTEMA DE DISEÑO
+       </div>
+       <h1 class="page-title">
+        Dashboard
+       </h1>
+       <p class="page-description">
+        Seguimiento de solicitudes, revisión e impresión en un solo lugar.
+       </p>
+      </div>
+     </header>
+     <div class="dashboard-context">
+      <span class="badge badge-neutral">
+       Datos de demostración
+      </span>
+      <span class="dashboard-range" id="dashboardRange">
+      </span>
+      <span class="dashboard-updated" id="dashboardUpdated">
+       Escenario de prueba · Sin conexión a servicios
+      </span>
+     </div>
+     <div class="surface dashboard-filters">
+      <div>
+       <label class="label" for="dashboardOffice">
+        Oficina
+       </label>
+       <select class="field" id="dashboardOffice">
+        <option value="">
+         Todas las oficinas
+        </option>
+        <option>
+         Santiago
+        </option>
+        <option>
+         Valparaíso
+        </option>
+        <option>
+         Viña del Mar
+        </option>
+        <option>
+         Quilpué
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="label" for="dashboardPeriod">
+        Período de ejemplo
+       </label>
+       <select class="field" id="dashboardPeriod">
+        <option value="7">
+         Últimos 7 días
+        </option>
+        <option value="14">
+         Últimos 14 días
+        </option>
+       </select>
+      </div>
+      <button class="btn btn-secondary" id="dashboardReset" type="button">
+       Restablecer filtros
+      </button>
+      <button class="btn btn-primary" id="dashboardRefresh" type="button">
+       <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 11a8 8 0 0 0-14-5L3 9m0-5v5h5M4 13a8 8 0 0 0 14 5l3-3m0 5v-5h-5">
+        </path>
+       </svg>
+       <span>
+        Actualizar resumen
+       </span>
+      </button>
+      <span class="dashboard-loading" hidden="" id="dashboardLoading" role="status">
+       <span aria-hidden="true" class="pc-loader pc-loader-ring pc-loader-sm">
+       </span>
+       Actualizando…
+      </span>
+     </div>
+     <div aria-busy="false" id="dashboardOverview">
+      <section aria-label="Indicadores de solicitudes" class="dashboard-metrics">
+       <article class="surface dashboard-metric">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="violet">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <rect height="18" rx="2" width="16" x="4" y="3">
+           </rect>
+           <path d="M8 8h8M8 12h8M8 16h5">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Solicitudes del período
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="total">
+         —
+        </strong>
+        <p class="card-detail">
+         Registros en el rango seleccionado
+        </p>
+       </article>
+       <article class="surface dashboard-metric">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="amber">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z">
+           </path>
+           <circle cx="12" cy="12" r="3">
+           </circle>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          En revisión
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="review">
+         —
+        </strong>
+        <p class="card-detail">
+         Información pendiente de validar
+        </p>
+       </article>
+       <article class="surface dashboard-metric">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="teal">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M6 8V3h12v5M6 17H3V8h18v9h-3">
+           </path>
+           <path d="M6 14h12v7H6Z">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Listas para imprimir
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="ready">
+         —
+        </strong>
+        <p class="card-detail">
+         Preparadas para la siguiente etapa
+        </p>
+       </article>
+       <article class="surface dashboard-metric">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="green">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <circle cx="12" cy="12" r="9">
+           </circle>
+           <path d="m8 12 3 3 5-6">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Impresas
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="printed">
+         —
+        </strong>
+        <p class="card-detail">
+         Etapa de impresión completada
+        </p>
+       </article>
+      </section>
+      <div class="dashboard-charts">
+       <section aria-labelledby="dashboardChartTitle" class="surface dashboard-chart-card">
+        <div class="dashboard-section-head">
+         <div>
+          <h2 class="section-title" id="dashboardChartTitle">
+           Actividad de solicitudes
+          </h2>
+          <p class="card-detail">
+           Registros por día en el período seleccionado
+          </p>
+         </div>
+         <span class="dashboard-chart-legend">
+          <span>
+          </span>
+          Solicitudes
+         </span>
+        </div>
+        <div aria-label="Actividad del período" class="dashboard-bar-chart" id="dashboardBars" role="img">
+        </div>
+        <details class="dashboard-chart-data">
+         <summary>
+          Ver datos del gráfico
+         </summary>
+         <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+          <table class="data-table">
+           <caption class="sr-only">
+            Solicitudes por día
+           </caption>
+           <thead>
+            <tr>
+             <th scope="col">
+              Día
+             </th>
+             <th scope="col">
+              Solicitudes
+             </th>
+            </tr>
+           </thead>
+           <tbody id="dashboardChartData">
+           </tbody>
+          </table>
+         </div>
+        </details>
+       </section>
+       <section aria-labelledby="dashboardStatusTitle" class="surface dashboard-chart-card">
+        <div class="dashboard-section-head">
+         <div>
+          <h2 class="section-title" id="dashboardStatusTitle">
+           Estado de las solicitudes
+          </h2>
+          <p class="card-detail">
+           Distribución del período
+          </p>
+         </div>
+        </div>
+        <div class="dashboard-status-chart">
+         <div aria-hidden="true" class="dashboard-donut" id="dashboardDonut">
+          <span>
+           <strong id="dashboardDonutTotal">
+            —
+           </strong>
+           <small>
+            solicitudes
+           </small>
+          </span>
+         </div>
+         <ul aria-label="Cantidad y porcentaje por estado" class="dashboard-state-list" id="dashboardStates">
+         </ul>
+        </div>
+       </section>
+      </div>
+     </div>
+     <div class="dashboard-workspace">
+      <section aria-labelledby="dashboardRecentTitle" class="surface dashboard-recent">
+       <div class="dashboard-section-head">
+        <div>
+         <h2 class="section-title" id="dashboardRecentTitle" tabindex="-1">
+          Solicitudes recientes
+         </h2>
+         <p class="card-detail">
+          Consulta el detalle y sigue cada etapa
+         </p>
+        </div>
+        <a class="dashboard-text-link" href="tablas.html">
+         Explorar tablas
+         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14m-6-6 6 6-6 6">
+          </path>
+         </svg>
+        </a>
+       </div>
+       <div class="dashboard-table-tools">
+        <div class="input-icon">
+         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7">
+          </circle>
+          <path d="m16 16 5 5">
+          </path>
+         </svg>
+         <input aria-label="Buscar solicitudes del dashboard" class="field" id="dashboardSearch" placeholder="Código, oficina o tipo de solicitud…" type="search"/>
+        </div>
+        <div aria-label="Filtrar solicitudes por estado" class="dashboard-status-filters" role="group">
+         <button aria-pressed="true" data-dashboard-filter="" type="button">
+          Todas
+         </button>
+         <button aria-pressed="false" data-dashboard-filter="En revisión" type="button">
+          En revisión
+         </button>
+         <button aria-pressed="false" data-dashboard-filter="Lista para imprimir" type="button">
+          Listas
+         </button>
+         <button aria-pressed="false" data-dashboard-filter="Impresa" type="button">
+          Impresas
+         </button>
+         <button aria-pressed="false" data-dashboard-filter="Con observaciones" type="button">
+          Con observaciones
+         </button>
+        </div>
+       </div>
+       <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+        <table class="data-table dashboard-table">
+         <caption class="sr-only">
+          Solicitudes de demostración según la oficina y período seleccionados
+         </caption>
+         <thead>
+          <tr>
+           <th scope="col">
+            Solicitud
+           </th>
+           <th scope="col">
+            Oficina
+           </th>
+           <th scope="col">
+            Estado
+           </th>
+           <th scope="col">
+            Fecha
+           </th>
+           <th scope="col">
+            Detalle
+           </th>
+          </tr>
+         </thead>
+         <tbody id="dashboardRows">
+         </tbody>
+        </table>
+       </div>
+       <div class="empty-state" hidden="" id="dashboardEmpty">
+        <h3 class="card-title">
+         No encontramos solicitudes
+        </h3>
+        <p class="card-detail">
+         Prueba con otro término o restablece los filtros.
+        </p>
+        <button class="btn btn-secondary btn-sm" id="dashboardEmptyReset" type="button">
+         Restablecer filtros
+        </button>
+       </div>
+       <div class="dashboard-table-footer">
+        <span aria-live="polite" class="field-hint" id="dashboardCount" role="status">
+        </span>
+        <nav aria-label="Páginas de solicitudes recientes" class="pagination">
+         <button aria-label="Página anterior de solicitudes" class="page-btn" id="dashboardPrev" type="button">
+          ‹
+         </button>
+         <span class="dashboard-page-label" id="dashboardPage">
+         </span>
+         <button aria-label="Página siguiente de solicitudes" class="page-btn" id="dashboardNext" type="button">
+          ›
+         </button>
+        </nav>
+       </div>
+      </section>
+      <aside aria-label="Herramientas y seguimiento" class="dashboard-side">
+       <section class="surface dashboard-side-card">
+        <h2 class="section-title">
+         Accesos rápidos
+        </h2>
+        <div class="dashboard-shortcuts">
+         <a class="dashboard-shortcut" href="formularios.html">
+          <span class="metric-icon" data-icon-tone="violet">
+           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5v14M5 12h14">
+            </path>
+           </svg>
+          </span>
+          <span>
+           <strong>
+            Nueva solicitud
+           </strong>
+           <small>
+            Probar el formulario
+           </small>
+          </span>
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M5 12h14m-6-6 6 6-6 6">
+           </path>
+          </svg>
+         </a>
+         <a class="dashboard-shortcut" href="buscadores.html">
+          <span class="metric-icon" data-icon-tone="teal">
+           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7">
+            </circle>
+            <path d="m16 16 5 5">
+            </path>
+           </svg>
+          </span>
+          <span>
+           <strong>
+            Buscar solicitud
+           </strong>
+           <small>
+            Consultar y filtrar
+           </small>
+          </span>
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M5 12h14m-6-6 6 6-6 6">
+           </path>
+          </svg>
+         </a>
+         <a class="dashboard-shortcut" href="steppers.html">
+          <span class="metric-icon" data-icon-tone="amber">
+           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 8V3h12v5M6 17H3V8h18v9h-3">
+            </path>
+            <path d="M6 14h12v7H6Z">
+            </path>
+           </svg>
+          </span>
+          <span>
+           <strong>
+            Flujo de impresión
+           </strong>
+           <small>
+            Recorrer las etapas
+           </small>
+          </span>
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M5 12h14m-6-6 6 6-6 6">
+           </path>
+          </svg>
+         </a>
+        </div>
+       </section>
+       <section class="surface dashboard-side-card">
+        <div class="dashboard-side-heading">
+         <span class="metric-icon" data-icon-tone="rose">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z">
+           </path>
+           <circle cx="12" cy="12" r="3">
+           </circle>
+          </svg>
+         </span>
+         <h2 class="section-title">
+          Requieren atención
+         </h2>
+        </div>
+        <strong class="dashboard-attention-count" id="dashboardAttentionCount">
+         —
+        </strong>
+        <p class="card-detail">
+         Solicitudes con observaciones que necesitan una revisión.
+        </p>
+        <button class="btn btn-secondary btn-sm" id="dashboardAttention" type="button">
+         Ver solicitudes
+        </button>
+       </section>
+       <section class="surface dashboard-side-card">
+        <h2 class="section-title">
+         Últimos movimientos
+        </h2>
+        <ol class="dashboard-timeline" id="dashboardTimeline">
+        </ol>
+       </section>
+      </aside>
+     </div>
+     <p aria-live="polite" class="sr-only" id="dashboardStatus" role="status">
+     </p>
+     <dialog aria-describedby="dashboardDetailNote" aria-labelledby="dashboardDetailTitle" class="dialog dashboard-detail" id="dashboardDetail">
+      <div class="dialog-header">
+       <div>
+        <p class="eyebrow">
+         Detalle de solicitud
+        </p>
+        <h2 class="section-title" id="dashboardDetailTitle">
+         Solicitud de ejemplo
+        </h2>
+       </div>
+       <button aria-label="Cerrar detalle de solicitud" class="icon-btn" data-close-dialog="" type="button">
+        ×
+       </button>
+      </div>
+      <div class="dialog-content">
+       <p class="field-hint" id="dashboardDetailNote">
+        Datos ficticios para revisar el comportamiento de la interfaz.
+       </p>
+       <dl class="detail-fields" id="dashboardDetailFields">
+       </dl>
+       <h3 class="card-title">
+        Etapas del proceso
+       </h3>
+       <ol aria-label="Progreso de la solicitud" class="dashboard-detail-steps" id="dashboardDetailSteps">
+       </ol>
+      </div>
+      <div class="dialog-footer">
+       <button class="btn btn-secondary" data-close-dialog="" type="button">
+        Cerrar
+       </button>
+       <a class="btn btn-primary" href="formularios.html">
+        Ver formulario de ejemplo
+       </a>
+      </div>
+     </dialog>
+     <div class="footer-note">
+      <svg aria-hidden="true" class="icon icon-sm" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <circle cx="12" cy="12" r="10">
+       </circle>
+       <path d="M12 11v6M12 7h.01">
+       </path>
+      </svg>
+      Prototipo funcional de interfaz · Datos de ejemplo · No reemplaza procesos productivos TNE.
+     </div>
+    </main>
+   </div>
+  </div>
+  <div aria-live="polite" class="toast-zone" id="toastZone" role="status">
+  </div>
+  <script defer="" src="src/app.js">
+  </script>
+  <script defer="" src="src/dashboard.js">
+  </script>
+ </body>
+</html>

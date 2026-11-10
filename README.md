@@ -1,6 +1,6 @@
 # PrintCloud · Proyecto original mejorado v2.2
 
-Actualización sobre `Printcloud-Original-Mejorado-v2.1.zip`, siguiendo la revisión del 4 de noviembre de 2026. Conserva las 11 pantallas, los logotipos originales, el sistema de diseño azul, los loaders, las animaciones y el historial de notificaciones. `index.html` sigue siendo la matriz de elementos.
+Actualización sobre `Printcloud-Original-Mejorado-v2.1.zip`, siguiendo la revisión del 4 de noviembre de 2026. Conserva las pantallas de la biblioteca, los logotipos originales, el sistema de diseño azul, los loaders, las animaciones y el historial de notificaciones. `index.html` sigue siendo la matriz de elementos.
 <img width="1786" height="895" alt="image" src="https://github.com/user-attachments/assets/553502c5-953f-4b56-a4f1-9789f7e799f1" />
 
 
@@ -28,7 +28,7 @@ La biblioteca usa datos ficticios. No incluye autenticación, validación real d
 
 ## Páginas
 
-`index.html`, `login.html`, `tipografia.html`, `iconos.html`, `loaders.html`, `formularios.html`, `steppers.html`, `modales.html`, `tablas.html`, `buscadores.html` y `alertas.html`.
+`index.html`, `dashboard.html`, `login.html`, `tipografia.html`, `iconos.html`, `loaders.html`, `formularios.html`, `steppers.html`, `modales.html`, `tablas.html`, `buscadores.html` y `alertas.html`.
 
 ## Desarrollo y regeneración
 
@@ -60,3 +60,16 @@ Las pruebas opcionales `npm run qa:browser` usan Playwright y Chrome/Chromium. C
 - Informes de la versión base: `docs/historico-v2.1/`. Informes anteriores: `docs/historico-v2/`.
 
 Las comprobaciones parciales no constituyen una declaración de conformidad integral WCAG 2.2 AA.
+
+## Dashboard de prueba · 10 de noviembre de 2026
+
+Abrir `dashboard.html`, disponible en **Páginas de prueba → Dashboard** y desde una tarjeta de la portada. Es una pantalla operativa de demostración con indicadores, gráficos, tabla, detalle de solicitud y accesos a los ejemplos del formulario, buscadores y stepper.
+
+- Oficina y período actualizan indicadores, gráficos y tabla de manera coherente.
+- La búsqueda, los estados y la paginación se aplican a la tabla.
+- «Requieren atención» filtra las observaciones; «Actualizar resumen» muestra el loader y genera una notificación de demostración.
+- Las fechas corresponden a un escenario fijo de noviembre de 2026; no se consultan servicios ni se modifican registros reales.
+
+La biblioteca incorpora seis tonos de iconos con variantes para claro y oscuro, definidos en `src/refinements.css`. La selección del menú conserva su fondo, sin franja lateral celeste.
+
+Fuentes del Dashboard: `components/dashboard-content.html` y `src/dashboard.js`. El generador conserva la página y sus enlaces. Ver [guía y QA del Dashboard](docs/DASHBOARD.md).

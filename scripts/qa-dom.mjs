@@ -19,6 +19,7 @@ function load(file){
  w.document.addEventListener('click',e=>{if(e.target.closest('a[download]'))e.preventDefault();});
  w.eval(fs.readFileSync(path.join(root,'src/theme-init.js'),'utf8'));
  w.eval(fs.readFileSync(path.join(root,'src/app.js'),'utf8'));
+ if(w.document.querySelector('script[src="src/dashboard.js"]'))w.eval(fs.readFileSync(path.join(root,'src/dashboard.js'),'utf8'));
  const $=s=>w.document.querySelector(s), $$=s=>[...w.document.querySelectorAll(s)];
  const input=(s,value,event='input')=>{$(s).value=value;$(s).dispatchEvent(new w.Event(event,{bubbles:true}));};
  return {w,$,$$,input,close:()=>dom.window.close()};
@@ -64,6 +65,15 @@ for(const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))){test('Ini
  test('Login: diapositivas ocultas son inertes',()=>{$$('[data-login-slide]').forEach(slide=>{assert.equal(slide.getAttribute('aria-hidden'),String(slide.hidden));assert.equal(slide.hasAttribute('inert'),slide.hidden);});});
  test('Login: navegación circular y controles nativos',()=>{$('#loginSlideNext').click();assert.equal($('#loginSlideCount').textContent,'1 de 3');$('#loginSlidePrev').click();assert.equal($('#loginSlideCount').textContent,'3 de 3');$$('.login-carousel-controls button').forEach(button=>{assert.equal(button.type,'button');assert.equal(button.disabled,false);});});
  test('Login: sin recordar usuario ni conexiones productivas',()=>{assert.equal($('#rememberMe'),null);assert.match($('.login-feature-note').textContent,/no están disponibles/);});
+ d.close();
+}
+{
+ const d=load('dashboard.html'),{$,$$,input}=d;
+ const metric=key=>Number($(`[data-dashboard-metric="${key}"]`).textContent);
+ test('Dashboard: totales y distribución coherentes',()=>{assert(metric('total')>0);assert.equal(Number($('#dashboardDonutTotal').textContent),metric('total'));assert.equal($$('#dashboardChartData tr').length,7);assert.equal($$('#dashboardRows tr').length,5);});
+ test('Dashboard: oficina y período actualizan los indicadores',()=>{const total=metric('total');input('#dashboardOffice','Valparaíso','change');assert(metric('total')<total);const week=metric('total');input('#dashboardPeriod','14','change');assert(metric('total')>week);assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Valparaíso')));assert.equal($$('#dashboardChartData tr').length,14);});
+ test('Dashboard: paginación y filtro sin tildes',()=>{const first=$('#dashboardRows tr').textContent;$('#dashboardNext').click();assert.notEqual($('#dashboardRows tr').textContent,first);input('#dashboardSearch','zzzzzz');assert.equal($('#dashboardEmpty').hidden,false);assert.equal($$('#dashboardRows tr').length,0);$('#dashboardEmptyReset').click();input('#dashboardSearch','vina');assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Viña')));});
+ test('Dashboard: observaciones y detalle',()=>{$('#dashboardAttention').click();assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Con observaciones')));const code=$('#dashboardRows button').dataset.dashboardDetail;$('#dashboardRows button').click();assert.equal($('#dashboardDetail').open,true);assert.equal($('#dashboardDetailTitle').textContent,code);assert.equal($$('#dashboardDetailSteps [aria-current="step"]').length,1);});
  d.close();
 }
 console.log(JSON.stringify({environment:'Node + jsdom 26; DOM simulado, sin layout ni motor de navegador',results},null,2));

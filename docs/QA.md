@@ -54,3 +54,15 @@ Para las pruebas de Chrome: disponer de Playwright, configurar `PRINTCLOUD_PLAYW
 ## Ajuste posterior · Login móvil sin slider
 
 Por solicitud posterior, bajo 1024 px el panel informativo queda oculto y solo se muestra el formulario de acceso. Se comprobó en Chrome a 360, 768, 1023, 1024 y 1440 px, en claro y oscuro: formulario visible, slider oculto también en el árbol accesible móvil, slider operativo en escritorio y ausencia de overflow. Las capturas y el informe completo anteriores reflejan el diseño previo con slider debajo del formulario en móvil; esta nota actualiza ese comportamiento.
+
+## Actualización · Dashboard y acentos visuales · 10 de noviembre de 2026
+
+Se añadió `dashboard.html`, accesible desde «Páginas de prueba» y desde la portada. El proyecto tiene ahora 12 pantallas. Se conservan las comprobaciones anteriores como evidencia de sus respectivas revisiones.
+
+- Suite DOM ampliada: **38 casos aprobados**, incluyendo filtros, totales coherentes, paginación, estado vacío y detalle del Dashboard. Evidencia: `QA-DASHBOARD-DOM.json`.
+- Chrome local: **13 grupos aprobados**, incluyendo filtros y gráficos coherentes, búsqueda sin tildes, paginación, detalle con Escape y retorno de foco, actualización con loader y notificaciones, menú compacto e iconos con colores. Evidencia: `QA-DASHBOARD.json`; capturas en `qa-dashboard/`.
+- Dashboard probado a **320, 390, 768, 1024 y 1440 px** en claro y oscuro, sin overflow de página. La tabla conserva su desplazamiento horizontal dentro de la región. Los filtros funcionan con movimiento reducido.
+- Auditoría estática: **12 HTML, 0 problemas** en las reglas comprobadas. Recursos actuales: **283 referencias locales correctas**. Contraste: **27/27 pares seleccionados**, incluyendo los seis tonos de iconos en ambos temas.
+- Regeneración del generador original, compilación Tailwind y posprocesado idempotente sobre las 12 páginas verificados.
+
+Estas comprobaciones no sustituyen las pruebas manuales pendientes con lectores de pantalla, zoom nativo, dispositivos físicos ni la evaluación WCAG integral indicadas arriba. Los datos de noviembre de 2026 del Dashboard son ficticios y no se consultan servicios.

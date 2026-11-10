@@ -477,7 +477,6 @@ html[data-theme="dark"] {
   .nav-link[aria-current="page"] {
     background: #3c759f;
     color: white;
-    box-shadow: inset 3px 0 #a8d4f0;
   }
   .nav-link .icon {
     opacity: .9;

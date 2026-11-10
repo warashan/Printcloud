@@ -120,6 +120,102 @@
       "ratio": 5.26,
       "threshold": 3,
       "pass": true
+    },
+    {
+      "pair": "Icono violeta claro",
+      "foreground": "#6d3bc6",
+      "background": "#f2ebfc",
+      "ratio": 5.84,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono verde claro",
+      "foreground": "#146b50",
+      "background": "#e6f5ee",
+      "ratio": 5.74,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono ámbar claro",
+      "foreground": "#915509",
+      "background": "#fff3da",
+      "ratio": 5.44,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono coral claro",
+      "foreground": "#b43a58",
+      "background": "#fdedf1",
+      "ratio": 5.03,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono turquesa claro",
+      "foreground": "#0d7180",
+      "background": "#e6f5f6",
+      "ratio": 5.08,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono índigo claro",
+      "foreground": "#4259b2",
+      "background": "#edf0ff",
+      "ratio": 5.6,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono violeta oscuro",
+      "foreground": "#d1b8ff",
+      "background": "#342744",
+      "ratio": 7.9,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono verde oscuro",
+      "foreground": "#89dcb6",
+      "background": "#1e3b33",
+      "ratio": 7.51,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono ámbar oscuro",
+      "foreground": "#f1c779",
+      "background": "#3e3321",
+      "ratio": 7.75,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono coral oscuro",
+      "foreground": "#ffafc2",
+      "background": "#422b37",
+      "ratio": 7.45,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono turquesa oscuro",
+      "foreground": "#8bd9e1",
+      "background": "#1d3841",
+      "ratio": 7.74,
+      "threshold": 3,
+      "pass": true
+    },
+    {
+      "pair": "Icono índigo oscuro",
+      "foreground": "#bac6ff",
+      "background": "#2b324b",
+      "ratio": 7.59,
+      "threshold": 3,
+      "pass": true
     }
   ]
 }

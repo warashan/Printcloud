@@ -1,0 +1,57 @@
+{
+  "results": [
+    {
+      "name": "Acceso desde la biblioteca e inicialización",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Totales coherentes entre indicadores, gráfico diario y distribución",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Filtros de oficina y período actualizan todo el resumen",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Paginación, búsqueda sin tildes, estado vacío y restauración",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Observaciones, detalle nativo, progreso y retorno de foco",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Actualización con loader, aria-busy e historial de notificaciones",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Dashboard responsive sin overflow y sin franja de selección, tema light",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Dashboard responsive sin overflow y sin franja de selección, tema dark",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Menú compacto y Dashboard adaptado al espacio disponible",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Paleta multicolor en iconos de tarjetas en ambos temas",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Dashboard enlazado e iconos con tono en todas las pantallas con menú",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Controles funcionales con movimiento reducido",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sin excepciones JavaScript",
+      "status": "Aprobado"
+    }
+  ],
+  "errors": []
+}

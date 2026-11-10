@@ -12,12 +12,32 @@ def refine_all(root):
   for group in soup.select('.theme-wrap'):
    if not group.select_one('[data-theme-choice="system"]'):
     group.append(insert('<button type="button" class="theme-btn theme-system" data-theme-choice="system" aria-label="Tema del sistema" title="Tema del sistema" aria-pressed="false"><svg class="icon icon-sm" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 16v5"></path></svg></button>').button)
+  # Colores estables por componente, compartidos por las páginas de la biblioteca.
+  tones={'tipografia.html':'violet','iconos.html':'rose','loaders.html':'teal','formularios.html':'indigo','steppers.html':'amber','modales.html':'violet','tablas.html':'teal','buscadores.html':'teal','alertas.html':'amber','login.html':'green','dashboard.html':'indigo'}
+  for ix,icon in enumerate(soup.select('.metric-icon')):
+   if icon.get('data-icon-tone'):continue
+   link=icon.find_parent('a',href=True)
+   icon['data-icon-tone']=tones.get(link.get('href') if link else '', ('violet','teal','amber','rose')[ix%4])
+   if file.stem=='login':icon['data-icon-tone']='green'
+  if file.stem=='dashboard':
+   main=soup.select_one('main')
+   if main:main['class']=list(dict.fromkeys(main.get('class',[])+['dashboard-page']))
+   if not soup.select_one('script[src="src/dashboard.js"]'):
+    soup.body.append(soup.new_tag('script',src='src/dashboard.js',defer=''))
   avatar=soup.select_one('.topbar .avatar')
   if avatar and not soup.select_one('#profileToggle'):
    profile=insert((root/'components/perfil.html').read_text(encoding='utf-8'))
    for node in list(profile.contents):avatar.insert_before(node)
    avatar.decompose()
   sidebar=soup.select_one('#sidebar')
+  if sidebar and not sidebar.select_one('a[href="dashboard.html"]'):
+   nav=insert('<div class="nav-heading">Páginas de prueba</div><nav aria-label="Páginas de prueba"><a class="nav-link" href="dashboard.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg><span>Dashboard</span></a></nav>')
+   brand=sidebar.select_one('.brand')
+   if brand:
+    for node in reversed(list(nav.contents)):brand.insert_after(node)
+  if sidebar and file.stem=='dashboard':
+   for link in sidebar.select('a[aria-current]'):link.attrs.pop('aria-current',None)
+   sidebar.select_one('a[href="dashboard.html"]')['aria-current']='page'
   if sidebar and not soup.select_one('#menuSearch'):
    groups=sidebar.select('.nav-details')
    if groups:

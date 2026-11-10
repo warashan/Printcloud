@@ -43,6 +43,20 @@ pairs=[
  ('Texto en tema oscuro','#f0f5fb','#172638',4.5),
  ('Borde campo oscuro','#829ab1','#172638',3),
 ]
+pairs += [
+ ('Icono violeta claro','#6d3bc6','#f2ebfc',3),
+ ('Icono verde claro','#146b50','#e6f5ee',3),
+ ('Icono ámbar claro','#915509','#fff3da',3),
+ ('Icono coral claro','#b43a58','#fdedf1',3),
+ ('Icono turquesa claro','#0d7180','#e6f5f6',3),
+ ('Icono índigo claro','#4259b2','#edf0ff',3),
+ ('Icono violeta oscuro','#d1b8ff','#342744',3),
+ ('Icono verde oscuro','#89dcb6','#1e3b33',3),
+ ('Icono ámbar oscuro','#f1c779','#3e3321',3),
+ ('Icono coral oscuro','#ffafc2','#422b37',3),
+ ('Icono turquesa oscuro','#8bd9e1','#1d3841',3),
+ ('Icono índigo oscuro','#bac6ff','#2b324b',3),
+]
 contrast=[]
 for name,fg,bg,threshold in pairs:
  a,b=sorted((luminance(fg),luminance(bg)))
