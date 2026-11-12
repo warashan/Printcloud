@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-12T17:14:11.295Z",
+  "checks": [
+    {
+      "name": "Datos iniciales y navegación activa",
+      "passed": true
+    },
+    {
+      "name": "Filtros combinados, estado vacío y limpiar",
+      "passed": true
+    },
+    {
+      "name": "Consulta de evidencia inicial identificada como ilustración",
+      "passed": true
+    },
+    {
+      "name": "Modal y validación de campos obligatorios",
+      "passed": true
+    },
+    {
+      "name": "Folios inválidos, duplicados y previamente declarados; quitar selección y todos",
+      "passed": true
+    },
+    {
+      "name": "Validación de adjuntos, previsualización y quitar archivo",
+      "passed": true
+    },
+    {
+      "name": "Declarar crea lote, conserva evidencia y pagina",
+      "passed": true
+    },
+    {
+      "name": "Declaración evita reutilizar folios y restaura foco",
+      "passed": true
+    },
+    {
+      "name": "Página y modal sin desbordamiento, cinco tamaños, tema light",
+      "passed": true
+    },
+    {
+      "name": "Página y modal sin desbordamiento, cinco tamaños, tema dark",
+      "passed": true
+    },
+    {
+      "name": "Respeta movimiento reducido",
+      "passed": true
+    },
+    {
+      "name": "Recargar restablece la demostración; sin errores JavaScript",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

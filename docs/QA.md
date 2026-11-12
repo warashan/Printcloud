@@ -66,3 +66,22 @@ Se añadió `dashboard.html`, accesible desde «Páginas de prueba» y desde la 
 - Regeneración del generador original, compilación Tailwind y posprocesado idempotente sobre las 12 páginas verificados.
 
 Estas comprobaciones no sustituyen las pruebas manuales pendientes con lectores de pantalla, zoom nativo, dispositivos físicos ni la evaluación WCAG integral indicadas arriba. Los datos de noviembre de 2026 del Dashboard son ficticios y no se consultan servicios.
+
+## Actualización · Dashboard Centralizado según capturas · 12 de noviembre de 2026
+
+Se sustituyó la composición del Dashboard por la vista Centralizado de las seis capturas: filtros Desde/Hasta, seis indicadores, seguimiento acumulativo, estado por recepción, sucursales, atrasos y formularios de SLA/UTM. Los reportes de `qa-dashboard/` corresponden al diseño anterior.
+
+- **23 casos del modelo puro aprobados:** fechas válidas, fines de semana/feriados, vencimiento y atraso, integridad de impresión y ensobrado, relación física ajena/anulada, UTM faltante, tarifa cero, criterio de conversión, filtros por fechas, merma por declaración y stock independiente del rango. Evidencia: `QA-CENTRALIZADO-MODELO.json`.
+- **38 casos DOM aprobados:** incluye inicialización de las 12 pantallas y los nuevos filtros, escenarios y guardado de configuración/UTM. Evidencia: `QA-CENTRALIZADO-DOM.json`.
+- **19 grupos Chrome aprobados:** consistencia de indicadores y gráficos, rango inválido, filtro por sucursal, atrasos, búsqueda y paginación, detalle con teclado/Escape y retorno de foco, CSV real filtrado, conversión faltante, guardado y recuperación local, validación de feriados, escenario vacío, actualización y notificaciones. Evidencia: `QA-CENTRALIZADO.json`.
+- **320/390/768/1024/1440 px en claro y oscuro:** sin overflow a nivel de página; gráfico diario y tablas con scroll interno. Se verificaron también menú compacto, paneles de configuración con teclado y movimiento reducido. Capturas actuales: `qa-centralizado/`.
+- **Auditoría estática:** 12 HTML, 0 incidencias entre las reglas comprobadas. **Recursos:** 280 referencias locales, 0 errores. Se conserva la comprobación de los 27 pares seleccionados de contraste; no cubre todos los colores de los gráficos ni todos los estados.
+- Regeneración de HTML, compilación Tailwind y posprocesado idempotente verificados.
+
+La estimación usa reglas explícitas de demostración documentadas en `DASHBOARD.md`; no valida una política contractual ni consulta cotizaciones UTM. No se ejecutó una revisión con lectores de pantalla reales, zoom nativo, Safari/Firefox ni una auditoría WCAG integral.
+
+## Merma de tarjetas · 12 de noviembre de 2026
+
+Nueva página con datos de las capturas y los componentes de la biblioteca. Validación en Chrome real: filtros combinados y estado vacío, modal nativo y campos obligatorios, formato y duplicados de folios, borrado individual/múltiple, adjuntos y consulta de evidencias, creación de lotes, paginación y retorno del foco. Página y modal comprobados a 320, 390, 768, 1024 y 1440 px en claro y oscuro; sin desbordamiento de página ni errores JavaScript. Se comprobó el respeto a movimiento reducido y que recargar restablece los registros de demostración. Evidencia en `QA-MERMA.json` y `qa-merma/`.
+
+Compilación: 13 páginas. Auditoría estática: 13 páginas sin incidencias en las reglas automatizadas. Recursos: 317 referencias locales, sin errores; 27/27 pares de contraste seleccionados aprobados. La inicialización DOM incluye la nueva página y su script. Esto no sustituye una auditoría completa de accesibilidad ni valida tarjetas reales.

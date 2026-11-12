@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "name": "Seis indicadores y 12 sucursales con totales coherentes",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Gráfico diario y tabla coinciden con indicadores",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Escenario del mes: estado sin atrasos y exportación deshabilitada",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Rango inválido no altera el resumen y Mes actual restaura fechas",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Filtros de sucursal y rango amplían o reducen el resumen",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Atrasos presentes y UTM faltante se muestra como conversión pendiente",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Paginación y búsqueda sin tildes en atrasos",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Detalle nativo y retorno de foco al cerrar con Escape",
+      "status": "Aprobado"
+    },
+    {
+      "name": "CSV real respeta filtro e identifica conversión pendiente",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Guardar UTM completa la conversión y actualiza el panel",
+      "status": "Aprobado"
+    },
+    {
+      "name": "SLA, feriados y UTM persisten después de recargar",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Validación de feriados no guarda fechas inexistentes y restablecimiento funciona",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Escenario vacío conserva stock actual y mensajes sin resultados",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Actualización, loader y notificación del escenario",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Layout sin overflow de página a 320/390/768/1024/1440px en tema light",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Layout sin overflow de página a 320/390/768/1024/1440px en tema dark",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Menú compacto compatible",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Paneles configurables con teclado y movimiento reducido",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sin excepciones JavaScript",
+      "status": "Aprobado"
+    }
+  ],
+  "errors": []
+}

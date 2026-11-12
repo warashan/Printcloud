@@ -13,7 +13,7 @@ def refine_all(root):
    if not group.select_one('[data-theme-choice="system"]'):
     group.append(insert('<button type="button" class="theme-btn theme-system" data-theme-choice="system" aria-label="Tema del sistema" title="Tema del sistema" aria-pressed="false"><svg class="icon icon-sm" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 16v5"></path></svg></button>').button)
   # Colores estables por componente, compartidos por las páginas de la biblioteca.
-  tones={'tipografia.html':'violet','iconos.html':'rose','loaders.html':'teal','formularios.html':'indigo','steppers.html':'amber','modales.html':'violet','tablas.html':'teal','buscadores.html':'teal','alertas.html':'amber','login.html':'green','dashboard.html':'indigo'}
+  tones={'merma-tarjetas.html':'rose','tipografia.html':'violet','iconos.html':'rose','loaders.html':'teal','formularios.html':'indigo','steppers.html':'amber','modales.html':'violet','tablas.html':'teal','buscadores.html':'teal','alertas.html':'amber','login.html':'green','dashboard.html':'indigo'}
   for ix,icon in enumerate(soup.select('.metric-icon')):
    if icon.get('data-icon-tone'):continue
    link=icon.find_parent('a',href=True)
@@ -22,8 +22,15 @@ def refine_all(root):
   if file.stem=='dashboard':
    main=soup.select_one('main')
    if main:main['class']=list(dict.fromkeys(main.get('class',[])+['dashboard-page']))
+   if not soup.select_one('script[src="src/dashboard-model.js"]'):
+    model=soup.new_tag('script',src='src/dashboard-model.js',defer='')
+    dashboard_script=soup.select_one('script[src="src/dashboard.js"]')
+    if dashboard_script:dashboard_script.insert_before(model)
+    else:soup.body.append(model)
    if not soup.select_one('script[src="src/dashboard.js"]'):
     soup.body.append(soup.new_tag('script',src='src/dashboard.js',defer=''))
+  if file.stem=='merma-tarjetas' and not soup.select_one('script[src="src/merma.js"]'):
+   soup.body.append(soup.new_tag('script',src='src/merma.js',defer=''))
   avatar=soup.select_one('.topbar .avatar')
   if avatar and not soup.select_one('#profileToggle'):
    profile=insert((root/'components/perfil.html').read_text(encoding='utf-8'))
@@ -35,6 +42,11 @@ def refine_all(root):
    brand=sidebar.select_one('.brand')
    if brand:
     for node in reversed(list(nav.contents)):brand.insert_after(node)
+  if sidebar and not sidebar.select_one('a[href="merma-tarjetas.html"]'):
+   sidebar.select_one('nav[aria-label="Páginas de prueba"]').append(insert('<a class="nav-link" href="merma-tarjetas.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M3 9h18m-7 4 4 4m0-4-4 4"></path></svg><span>Merma de tarjetas</span></a>').a)
+  if sidebar and file.stem=='merma-tarjetas':
+   for link in sidebar.select('a[aria-current]'):link.attrs.pop('aria-current',None)
+   sidebar.select_one('a[href="merma-tarjetas.html"]')['aria-current']='page'
   if sidebar and file.stem=='dashboard':
    for link in sidebar.select('a[aria-current]'):link.attrs.pop('aria-current',None)
    sidebar.select_one('a[href="dashboard.html"]')['aria-current']='page'

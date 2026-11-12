@@ -19,7 +19,9 @@ function load(file){
  w.document.addEventListener('click',e=>{if(e.target.closest('a[download]'))e.preventDefault();});
  w.eval(fs.readFileSync(path.join(root,'src/theme-init.js'),'utf8'));
  w.eval(fs.readFileSync(path.join(root,'src/app.js'),'utf8'));
+ if(w.document.querySelector('script[src="src/dashboard-model.js"]'))w.eval(fs.readFileSync(path.join(root,'src/dashboard-model.js'),'utf8'));
  if(w.document.querySelector('script[src="src/dashboard.js"]'))w.eval(fs.readFileSync(path.join(root,'src/dashboard.js'),'utf8'));
+ if(w.document.querySelector('script[src="src/merma.js"]'))w.eval(fs.readFileSync(path.join(root,'src/merma.js'),'utf8'));
  const $=s=>w.document.querySelector(s), $$=s=>[...w.document.querySelectorAll(s)];
  const input=(s,value,event='input')=>{$(s).value=value;$(s).dispatchEvent(new w.Event(event,{bubbles:true}));};
  return {w,$,$$,input,close:()=>dom.window.close()};
@@ -68,12 +70,12 @@ for(const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))){test('Ini
  d.close();
 }
 {
- const d=load('dashboard.html'),{$,$$,input}=d;
- const metric=key=>Number($(`[data-dashboard-metric="${key}"]`).textContent);
- test('Dashboard: totales y distribución coherentes',()=>{assert(metric('total')>0);assert.equal(Number($('#dashboardDonutTotal').textContent),metric('total'));assert.equal($$('#dashboardChartData tr').length,7);assert.equal($$('#dashboardRows tr').length,5);});
- test('Dashboard: oficina y período actualizan los indicadores',()=>{const total=metric('total');input('#dashboardOffice','Valparaíso','change');assert(metric('total')<total);const week=metric('total');input('#dashboardPeriod','14','change');assert(metric('total')>week);assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Valparaíso')));assert.equal($$('#dashboardChartData tr').length,14);});
- test('Dashboard: paginación y filtro sin tildes',()=>{const first=$('#dashboardRows tr').textContent;$('#dashboardNext').click();assert.notEqual($('#dashboardRows tr').textContent,first);input('#dashboardSearch','zzzzzz');assert.equal($('#dashboardEmpty').hidden,false);assert.equal($$('#dashboardRows tr').length,0);$('#dashboardEmptyReset').click();input('#dashboardSearch','vina');assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Viña')));});
- test('Dashboard: observaciones y detalle',()=>{$('#dashboardAttention').click();assert($$('#dashboardRows tr').every(row=>row.textContent.includes('Con observaciones')));const code=$('#dashboardRows button').dataset.dashboardDetail;$('#dashboardRows button').click();assert.equal($('#dashboardDetail').open,true);assert.equal($('#dashboardDetailTitle').textContent,code);assert.equal($$('#dashboardDetailSteps [aria-current="step"]').length,1);});
+ const d=load('dashboard.html'),{$,$$,w,input}=d;
+ const metric=key=>Number($(`[data-dashboard-metric="${key}"]`).textContent.replace(/\./g,''));
+ test('Centralizado: seis indicadores y stock actual',()=>{assert.equal($$('[data-dashboard-metric]').length,6);assert(metric('total')>0);assert.equal(metric('stock'),664);assert.equal(metric('total'),metric('printed')+metric('pending'));});
+ test('Centralizado: filtro por fechas y sucursal',()=>{input('#dashboardFrom','2026-10-01');input('#dashboardTo','2026-11-12');input('#dashboardOffice','Valparaíso');$('#dashboardFilters').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));assert.equal(metric('stock'),72);assert.equal($$('#dashboardBranchRows tr').length,1);});
+ test('Centralizado: escenario sin solicitudes',()=>{input('#dashboardScenario','empty','change');assert.equal(metric('total'),0);assert.equal(metric('stock'),72);assert.equal($('#dashboardOverdueEmpty').hidden,false);assert.equal($('#dashboardExport').disabled,true);});
+ test('Centralizado: configuración y UTM se guardan localmente',()=>{input('#dashboardSlaDays','3');$('#dashboardSlaForm').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));assert.equal(JSON.parse(w.localStorage.getItem('printcloud-centralizado-settings-v1')).days,3);input('#dashboardUtmMonth','2026-11');input('#dashboardUtmValue','72500');$('#dashboardUtmForm').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));assert.equal(JSON.parse(w.localStorage.getItem('printcloud-centralizado-utm-v1'))['2026-11'].value,72500);});
  d.close();
 }
 console.log(JSON.stringify({environment:'Node + jsdom 26; DOM simulado, sin layout ni motor de navegador',results},null,2));

@@ -55,6 +55,17 @@
        Dashboard
       </span>
      </a>
+     <a class="nav-link" href="merma-tarjetas.html">
+      <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+       <rect height="16" rx="3" width="18" x="3" y="4">
+       </rect>
+       <path d="M3 9h18m-7 4 4 4m0-4-4 4">
+       </path>
+      </svg>
+      <span>
+       Merma de tarjetas
+      </span>
+     </a>
     </nav>
     <div class="nav-heading">
      Sistema de diseño
@@ -915,80 +926,88 @@
         Dashboard
        </h1>
        <p class="page-description">
-        Seguimiento de solicitudes, revisión e impresión en un solo lugar.
+        Centralizado · Recepción, stock, impresión y seguimiento de tarjetas.
        </p>
       </div>
      </header>
      <div class="dashboard-context">
       <span class="badge badge-neutral">
-       Datos de demostración
+       Centralizado · Datos de demostración
       </span>
       <span class="dashboard-range" id="dashboardRange">
       </span>
-      <span class="dashboard-updated" id="dashboardUpdated">
-       Escenario de prueba · Sin conexión a servicios
+      <span class="dashboard-updated">
+       Corte del escenario:
+       <time datetime="2026-11-12">
+        12 nov 2026
+       </time>
       </span>
      </div>
-     <div class="surface dashboard-filters">
+     <form aria-label="Filtros del dashboard" class="surface dashboard-filters ops-filters" id="dashboardFilters" novalidate="">
+      <div>
+       <label class="label" for="dashboardFrom">
+        Desde
+       </label>
+       <input class="field" id="dashboardFrom" name="from" required="" type="date" value="2026-11-01"/>
+      </div>
+      <div>
+       <label class="label" for="dashboardTo">
+        Hasta
+       </label>
+       <input class="field" id="dashboardTo" name="to" required="" type="date" value="2026-11-30"/>
+      </div>
       <div>
        <label class="label" for="dashboardOffice">
-        Oficina
+        Sucursal
        </label>
        <select class="field" id="dashboardOffice">
         <option value="">
-         Todas las oficinas
-        </option>
-        <option>
-         Santiago
-        </option>
-        <option>
-         Valparaíso
-        </option>
-        <option>
-         Viña del Mar
-        </option>
-        <option>
-         Quilpué
+         Todas las sucursales
         </option>
        </select>
       </div>
-      <div>
-       <label class="label" for="dashboardPeriod">
-        Período de ejemplo
+      <button class="btn btn-primary" type="submit">
+       Aplicar filtros
+      </button>
+      <button class="btn btn-secondary" id="dashboardCurrentMonth" title="Noviembre de 2026, mes del escenario" type="button">
+       Mes actual
+      </button>
+      <button class="btn btn-ghost" id="dashboardLast90" type="button">
+       Últimos 90 días
+      </button>
+      <p class="field-error ops-form-message" id="dashboardFilterError" role="alert">
+      </p>
+     </form>
+     <div class="ops-scenario-bar">
+      <p class="field-hint">
+       Recepción para solicitudes e impresión · Solicitud para seguimiento · Declaración para merma
+      </p>
+      <div class="ops-scenario-tools">
+       <label class="sr-only" for="dashboardScenario">
+        Escenario de prueba
        </label>
-       <select class="field" id="dashboardPeriod">
-        <option value="7">
-         Últimos 7 días
+       <select class="field" id="dashboardScenario">
+        <option value="sample">
+         Con datos de ejemplo
         </option>
-        <option value="14">
-         Últimos 14 días
+        <option value="empty">
+         Sin solicitudes
         </option>
        </select>
+       <button aria-label="Actualizar resumen de demostración" class="icon-btn" id="dashboardRefresh" type="button">
+        <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+         <path d="M20 11a8 8 0 0 0-14-5L3 9m0-5v5h5M4 13a8 8 0 0 0 14 5l3-3m0 5v-5h-5">
+         </path>
+        </svg>
+       </button>
       </div>
-      <button class="btn btn-secondary" id="dashboardReset" type="button">
-       Restablecer filtros
-      </button>
-      <button class="btn btn-primary" id="dashboardRefresh" type="button">
-       <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 11a8 8 0 0 0-14-5L3 9m0-5v5h5M4 13a8 8 0 0 0 14 5l3-3m0 5v-5h-5">
-        </path>
-       </svg>
-       <span>
-        Actualizar resumen
-       </span>
-      </button>
-      <span class="dashboard-loading" hidden="" id="dashboardLoading" role="status">
-       <span aria-hidden="true" class="pc-loader pc-loader-ring pc-loader-sm">
-       </span>
-       Actualizando…
-      </span>
      </div>
      <div aria-busy="false" id="dashboardOverview">
-      <section aria-label="Indicadores de solicitudes" class="dashboard-metrics">
-       <article class="surface dashboard-metric">
+      <section aria-label="Indicadores de Centralizado" class="dashboard-metrics ops-metrics">
+       <article class="surface dashboard-metric ops-metric ops-metric-total">
         <div class="dashboard-metric-top">
          <span class="metric-icon" data-icon-tone="violet">
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
            <rect height="18" rx="2" width="16" x="4" y="3">
            </rect>
            <path d="M8 8h8M8 12h8M8 16h5">
@@ -996,65 +1015,40 @@
           </svg>
          </span>
          <span class="dashboard-metric-label">
-          Solicitudes del período
+          Solicitudes
          </span>
         </div>
         <strong class="dashboard-metric-value" data-dashboard-metric="total">
          —
         </strong>
-        <p class="card-detail">
-         Registros en el rango seleccionado
+        <p class="card-detail" id="dashboardMetricNote-total">
+         Ingresadas en el período
         </p>
        </article>
-       <article class="surface dashboard-metric">
-        <div class="dashboard-metric-top">
-         <span class="metric-icon" data-icon-tone="amber">
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z">
-           </path>
-           <circle cx="12" cy="12" r="3">
-           </circle>
-          </svg>
-         </span>
-         <span class="dashboard-metric-label">
-          En revisión
-         </span>
-        </div>
-        <strong class="dashboard-metric-value" data-dashboard-metric="review">
-         —
-        </strong>
-        <p class="card-detail">
-         Información pendiente de validar
-        </p>
-       </article>
-       <article class="surface dashboard-metric">
+       <article class="surface dashboard-metric ops-metric ops-metric-stock">
         <div class="dashboard-metric-top">
          <span class="metric-icon" data-icon-tone="teal">
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M6 8V3h12v5M6 17H3V8h18v9h-3">
-           </path>
-           <path d="M6 14h12v7H6Z">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <path d="m3 7 9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7M12 11v10">
            </path>
           </svg>
          </span>
          <span class="dashboard-metric-label">
-          Listas para imprimir
+          Stock disponible
          </span>
         </div>
-        <strong class="dashboard-metric-value" data-dashboard-metric="ready">
+        <strong class="dashboard-metric-value" data-dashboard-metric="stock">
          —
         </strong>
-        <p class="card-detail">
-         Preparadas para la siguiente etapa
+        <p class="card-detail" id="dashboardMetricNote-stock">
+         Fotografía actual, independiente del rango
         </p>
        </article>
-       <article class="surface dashboard-metric">
+       <article class="surface dashboard-metric ops-metric ops-metric-printed">
         <div class="dashboard-metric-top">
          <span class="metric-icon" data-icon-tone="green">
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <circle cx="12" cy="12" r="9">
-           </circle>
-           <path d="m8 12 3 3 5-6">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <path d="M6 8V3h12v5M6 17H3V8h18v9h-3M6 14h12v7H6Z">
            </path>
           </svg>
          </span>
@@ -1065,315 +1059,571 @@
         <strong class="dashboard-metric-value" data-dashboard-metric="printed">
          —
         </strong>
-        <p class="card-detail">
-         Etapa de impresión completada
+        <p class="card-detail" id="dashboardMetricNote-printed">
+         Tarjetas físicas asignadas o ensobradas
+        </p>
+       </article>
+       <article class="surface dashboard-metric ops-metric ops-metric-pending">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="amber">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <circle cx="12" cy="12" r="9">
+           </circle>
+           <path d="M12 7v5l3 2">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Pendientes
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="pending">
+         —
+        </strong>
+        <p class="card-detail" id="dashboardMetricNote-pending">
+         Solicitudes sin tarjeta vigente
+        </p>
+       </article>
+       <article class="surface dashboard-metric ops-metric ops-metric-waste">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="rose">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Merma oficial
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="waste">
+         —
+        </strong>
+        <p class="card-detail" id="dashboardMetricNote-waste">
+         Declaraciones registradas en el período
+        </p>
+       </article>
+       <article class="surface dashboard-metric ops-metric ops-metric-fine">
+        <div class="dashboard-metric-top">
+         <span class="metric-icon" data-icon-tone="indigo">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <circle cx="12" cy="12" r="9">
+           </circle>
+           <path d="M15 8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9M12 6v2M12 16v2">
+           </path>
+          </svg>
+         </span>
+         <span class="dashboard-metric-label">
+          Multas estimadas
+         </span>
+        </div>
+        <strong class="dashboard-metric-value" data-dashboard-metric="fine">
+         —
+        </strong>
+        <p class="card-detail" id="dashboardMetricNote-fine">
+         Equivalente en CLP según la UTM configurada
         </p>
        </article>
       </section>
-      <div class="dashboard-charts">
-       <section aria-labelledby="dashboardChartTitle" class="surface dashboard-chart-card">
-        <div class="dashboard-section-head">
-         <div>
-          <h2 class="section-title" id="dashboardChartTitle">
-           Actividad de solicitudes
-          </h2>
-          <p class="card-detail">
-           Registros por día en el período seleccionado
-          </p>
-         </div>
-         <span class="dashboard-chart-legend">
-          <span>
-          </span>
-          Solicitudes
-         </span>
-        </div>
-        <div aria-label="Actividad del período" class="dashboard-bar-chart" id="dashboardBars" role="img">
-        </div>
-        <details class="dashboard-chart-data">
-         <summary>
-          Ver datos del gráfico
-         </summary>
-         <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
-          <table class="data-table">
-           <caption class="sr-only">
-            Solicitudes por día
-           </caption>
-           <thead>
-            <tr>
-             <th scope="col">
-              Día
-             </th>
-             <th scope="col">
-              Solicitudes
-             </th>
-            </tr>
-           </thead>
-           <tbody id="dashboardChartData">
-           </tbody>
-          </table>
-         </div>
-        </details>
-       </section>
-       <section aria-labelledby="dashboardStatusTitle" class="surface dashboard-chart-card">
-        <div class="dashboard-section-head">
-         <div>
-          <h2 class="section-title" id="dashboardStatusTitle">
-           Estado de las solicitudes
-          </h2>
-          <p class="card-detail">
-           Distribución del período
-          </p>
-         </div>
-        </div>
-        <div class="dashboard-status-chart">
-         <div aria-hidden="true" class="dashboard-donut" id="dashboardDonut">
-          <span>
-           <strong id="dashboardDonutTotal">
-            —
-           </strong>
-           <small>
-            solicitudes
-           </small>
-          </span>
-         </div>
-         <ul aria-label="Cantidad y porcentaje por estado" class="dashboard-state-list" id="dashboardStates">
-         </ul>
-        </div>
-       </section>
+      <div class="alert alert-warning ops-conversion-alert" hidden="" id="dashboardConversionAlert" role="status">
+       <div>
+        <strong class="alert-title">
+         Conversión a CLP pendiente
+        </strong>
+        <p class="alert-text" id="dashboardConversionNote">
+        </p>
+       </div>
+       <button class="btn btn-secondary btn-sm" id="dashboardCompleteUtm" type="button">
+        Completar UTM
+       </button>
       </div>
-     </div>
-     <div class="dashboard-workspace">
-      <section aria-labelledby="dashboardRecentTitle" class="surface dashboard-recent">
+      <section aria-labelledby="dashboardTrackingTitle" class="surface ops-panel ops-tracking">
        <div class="dashboard-section-head">
         <div>
-         <h2 class="section-title" id="dashboardRecentTitle" tabindex="-1">
-          Solicitudes recientes
+         <h2 class="section-title" id="dashboardTrackingTitle">
+          Seguimiento global de tarjetas
          </h2>
          <p class="card-detail">
-          Consulta el detalle y sigue cada etapa
+          Etapas acumulativas: las ensobradas están incluidas en las impresas. Agrupadas por fecha de solicitud.
          </p>
         </div>
-        <a class="dashboard-text-link" href="tablas.html">
-         Explorar tablas
-         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12h14m-6-6 6 6-6 6">
-          </path>
-         </svg>
-        </a>
+        <span class="badge badge-info">
+         Trazabilidad
+        </span>
        </div>
-       <div class="dashboard-table-tools">
-        <div class="input-icon">
-         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7">
-          </circle>
-          <path d="m16 16 5 5">
-          </path>
-         </svg>
-         <input aria-label="Buscar solicitudes del dashboard" class="field" id="dashboardSearch" placeholder="Código, oficina o tipo de solicitud…" type="search"/>
+       <div class="ops-tracking-metrics">
+        <div class="surface ops-tracking-metric">
+         <span class="metric-icon" data-icon-tone="violet">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <rect height="18" rx="2" width="16" x="4" y="3">
+           </rect>
+           <path d="M8 8h8M8 12h8M8 16h5">
+           </path>
+          </svg>
+         </span>
+         <div>
+          <span>
+           Total
+          </span>
+          <strong data-tracking-metric="total">
+           —
+          </strong>
+         </div>
         </div>
-        <div aria-label="Filtrar solicitudes por estado" class="dashboard-status-filters" role="group">
-         <button aria-pressed="true" data-dashboard-filter="" type="button">
-          Todas
-         </button>
-         <button aria-pressed="false" data-dashboard-filter="En revisión" type="button">
-          En revisión
-         </button>
-         <button aria-pressed="false" data-dashboard-filter="Lista para imprimir" type="button">
-          Listas
-         </button>
-         <button aria-pressed="false" data-dashboard-filter="Impresa" type="button">
-          Impresas
-         </button>
-         <button aria-pressed="false" data-dashboard-filter="Con observaciones" type="button">
-          Con observaciones
-         </button>
+        <div class="surface ops-tracking-metric">
+         <span class="metric-icon" data-icon-tone="green">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <path d="M6 8V3h12v5M6 17H3V8h18v9h-3M6 14h12v7H6Z">
+           </path>
+          </svg>
+         </span>
+         <div>
+          <span>
+           Impresas
+          </span>
+          <strong data-tracking-metric="printed">
+           —
+          </strong>
+         </div>
+        </div>
+        <div class="surface ops-tracking-metric">
+         <span class="metric-icon" data-icon-tone="teal">
+          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+           <rect height="14" rx="2" width="18" x="3" y="5">
+           </rect>
+           <path d="m3 6 9 7 9-7">
+           </path>
+          </svg>
+         </span>
+         <div>
+          <span>
+           Ensobradas
+          </span>
+          <strong data-tracking-metric="enveloped">
+           —
+          </strong>
+         </div>
         </div>
        </div>
        <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
-        <table class="data-table dashboard-table">
+        <table class="data-table ops-tracking-table">
          <caption class="sr-only">
-          Solicitudes de demostración según la oficina y período seleccionados
+          Seguimiento global por fecha de solicitud
          </caption>
          <thead>
           <tr>
            <th scope="col">
-            Solicitud
+            Fecha de solicitud
            </th>
            <th scope="col">
-            Oficina
+            Total
            </th>
            <th scope="col">
-            Estado
+            Impresas
            </th>
            <th scope="col">
-            Fecha
+            Ensobradas
            </th>
            <th scope="col">
-            Detalle
+            Avance de impresión
            </th>
           </tr>
          </thead>
-         <tbody id="dashboardRows">
+         <tbody id="dashboardTrackingRows">
          </tbody>
         </table>
        </div>
-       <div class="empty-state" hidden="" id="dashboardEmpty">
-        <h3 class="card-title">
-         No encontramos solicitudes
-        </h3>
-        <p class="card-detail">
-         Prueba con otro término o restablece los filtros.
-        </p>
-        <button class="btn btn-secondary btn-sm" id="dashboardEmptyReset" type="button">
-         Restablecer filtros
-        </button>
+       <div class="empty-state ops-empty" hidden="" id="dashboardTrackingEmpty">
+        No hay solicitudes en este período.
        </div>
        <div class="dashboard-table-footer">
-        <span aria-live="polite" class="field-hint" id="dashboardCount" role="status">
+        <span class="field-hint" id="dashboardTrackingCount" role="status">
         </span>
-        <nav aria-label="Páginas de solicitudes recientes" class="pagination">
-         <button aria-label="Página anterior de solicitudes" class="page-btn" id="dashboardPrev" type="button">
+        <nav aria-label="Páginas de seguimiento" class="pagination">
+         <button aria-label="Página anterior" class="page-btn" id="dashboardTrackingPrev" type="button">
           ‹
          </button>
-         <span class="dashboard-page-label" id="dashboardPage">
+         <span class="dashboard-page-label" id="dashboardTrackingPage">
          </span>
-         <button aria-label="Página siguiente de solicitudes" class="page-btn" id="dashboardNext" type="button">
+         <button aria-label="Página siguiente" class="page-btn" id="dashboardTrackingNext" type="button">
           ›
          </button>
         </nav>
        </div>
       </section>
-      <aside aria-label="Herramientas y seguimiento" class="dashboard-side">
-       <section class="surface dashboard-side-card">
-        <h2 class="section-title">
-         Accesos rápidos
-        </h2>
-        <div class="dashboard-shortcuts">
-         <a class="dashboard-shortcut" href="formularios.html">
-          <span class="metric-icon" data-icon-tone="violet">
-           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 5v14M5 12h14">
-            </path>
-           </svg>
-          </span>
-          <span>
-           <strong>
-            Nueva solicitud
-           </strong>
-           <small>
-            Probar el formulario
-           </small>
-          </span>
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M5 12h14m-6-6 6 6-6 6">
-           </path>
-          </svg>
-         </a>
-         <a class="dashboard-shortcut" href="buscadores.html">
-          <span class="metric-icon" data-icon-tone="teal">
-           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="7">
-            </circle>
-            <path d="m16 16 5 5">
-            </path>
-           </svg>
-          </span>
-          <span>
-           <strong>
-            Buscar solicitud
-           </strong>
-           <small>
-            Consultar y filtrar
-           </small>
-          </span>
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M5 12h14m-6-6 6 6-6 6">
-           </path>
-          </svg>
-         </a>
-         <a class="dashboard-shortcut" href="steppers.html">
-          <span class="metric-icon" data-icon-tone="amber">
-           <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 8V3h12v5M6 17H3V8h18v9h-3">
-            </path>
-            <path d="M6 14h12v7H6Z">
-            </path>
-           </svg>
-          </span>
-          <span>
-           <strong>
-            Flujo de impresión
-           </strong>
-           <small>
-            Recorrer las etapas
-           </small>
-          </span>
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M5 12h14m-6-6 6 6-6 6">
-           </path>
-          </svg>
-         </a>
-        </div>
-       </section>
-       <section class="surface dashboard-side-card">
-        <div class="dashboard-side-heading">
-         <span class="metric-icon" data-icon-tone="rose">
-          <svg aria-hidden="true" class="icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-           <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z">
-           </path>
-           <circle cx="12" cy="12" r="3">
-           </circle>
-          </svg>
-         </span>
-         <h2 class="section-title">
-          Requieren atención
+      <section aria-labelledby="dashboardReceiptTitle" class="surface ops-panel dashboard-chart-card">
+       <div class="dashboard-section-head">
+        <div>
+         <h2 class="section-title" id="dashboardReceiptTitle">
+          Estado por fecha de recepción
          </h2>
+         <p class="card-detail">
+          Impresas y pendientes según su tarjeta vigente. La merma conserva su fecha de declaración.
+         </p>
         </div>
-        <strong class="dashboard-attention-count" id="dashboardAttentionCount">
-         —
-        </strong>
-        <p class="card-detail">
-         Solicitudes con observaciones que necesitan una revisión.
-        </p>
-        <button class="btn btn-secondary btn-sm" id="dashboardAttention" type="button">
-         Ver solicitudes
+        <span class="badge badge-neutral" id="dashboardDailyTotal">
+        </span>
+       </div>
+       <div aria-label="Series del gráfico" class="ops-chart-legend">
+        <span>
+         <i class="ops-swatch ops-color-printed">
+         </i>
+         Impresas vigentes
+        </span>
+        <span>
+         <i class="ops-swatch ops-color-pending">
+         </i>
+         Pendientes actuales
+        </span>
+        <span>
+         <i class="ops-swatch ops-color-waste">
+         </i>
+         Merma oficial
+        </span>
+       </div>
+       <div aria-label="Gráfico por fecha: desplazable horizontalmente" class="ops-chart-scroll" role="region" tabindex="0">
+        <div id="dashboardReceiptChart">
+        </div>
+       </div>
+       <p class="ops-chart-empty field-hint" hidden="" id="dashboardDailyEmpty">
+        No hay movimientos para el rango seleccionado.
+       </p>
+       <details class="dashboard-chart-data">
+        <summary>
+         Ver datos en tabla
+        </summary>
+        <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+         <table class="data-table">
+          <caption class="sr-only">
+           Impresas, pendientes y merma por fecha
+          </caption>
+          <thead>
+           <tr>
+            <th scope="col">
+             Fecha
+            </th>
+            <th scope="col">
+             Impresas vigentes
+            </th>
+            <th scope="col">
+             Pendientes actuales
+            </th>
+            <th scope="col">
+             Merma oficial
+            </th>
+           </tr>
+          </thead>
+          <tbody id="dashboardDailyRows">
+          </tbody>
+         </table>
+        </div>
+       </details>
+      </section>
+      <section aria-labelledby="dashboardBranchTitle" class="surface ops-panel dashboard-chart-card">
+       <div class="dashboard-section-head">
+        <div>
+         <h2 class="section-title" id="dashboardBranchTitle">
+          Solicitudes por sucursal
+         </h2>
+         <p class="card-detail">
+          Solicitudes recibidas y pendientes dentro del período seleccionado.
+         </p>
+        </div>
+       </div>
+       <div class="ops-chart-legend">
+        <span>
+         <i class="ops-swatch ops-color-total">
+         </i>
+         Solicitudes
+        </span>
+        <span>
+         <i class="ops-swatch ops-color-pending">
+         </i>
+         Pendientes
+        </span>
+       </div>
+       <div class="ops-branch-chart" id="dashboardBranchChart">
+       </div>
+       <details class="dashboard-chart-data">
+        <summary>
+         Ver datos por sucursal
+        </summary>
+        <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+         <table class="data-table">
+          <caption class="sr-only">
+           Solicitudes por sucursal
+          </caption>
+          <thead>
+           <tr>
+            <th scope="col">
+             Sucursal
+            </th>
+            <th scope="col">
+             Solicitudes
+            </th>
+            <th scope="col">
+             Pendientes
+            </th>
+           </tr>
+          </thead>
+          <tbody id="dashboardBranchRows">
+          </tbody>
+         </table>
+        </div>
+       </details>
+      </section>
+      <section aria-labelledby="dashboardOverdueTitle" class="surface ops-panel">
+       <div class="dashboard-section-head">
+        <div>
+         <h2 class="section-title" id="dashboardOverdueTitle">
+          Solicitudes pendientes con atraso
+         </h2>
+         <p class="card-detail">
+          Estimación al corte del escenario. El plazo se cuenta desde la recepción, excluyendo fines de semana y feriados configurados.
+         </p>
+        </div>
+        <span class="badge badge-warning" id="dashboardOverdueBadge">
+         0 solicitudes
+        </span>
+       </div>
+       <div class="ops-overdue-tools">
+        <label class="sr-only" for="dashboardSearch">
+         Buscar solicitudes atrasadas
+        </label>
+        <input class="field" id="dashboardSearch" placeholder="Código o sucursal…" type="search"/>
+        <button class="btn btn-secondary btn-sm" id="dashboardExport" type="button">
+         <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+          <path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4">
+          </path>
+         </svg>
+         Exportar pendientes
         </button>
-       </section>
-       <section class="surface dashboard-side-card">
-        <h2 class="section-title">
-         Últimos movimientos
-        </h2>
-        <ol class="dashboard-timeline" id="dashboardTimeline">
-        </ol>
-       </section>
-      </aside>
+       </div>
+       <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+        <table class="data-table ops-overdue-table" id="dashboardOverdueTable">
+         <caption class="sr-only">
+          Detalle y multa estimada de solicitudes pendientes con atraso
+         </caption>
+         <thead>
+          <tr>
+           <th scope="col">
+            Solicitud / sucursal
+           </th>
+           <th scope="col">
+            Recepción
+           </th>
+           <th scope="col">
+            Vencimiento
+           </th>
+           <th scope="col">
+            Atraso hábil
+           </th>
+           <th scope="col">
+            Estimación
+           </th>
+           <th scope="col">
+            Acción
+           </th>
+          </tr>
+         </thead>
+         <tbody id="dashboardOverdueRows">
+         </tbody>
+        </table>
+       </div>
+       <div class="empty-state ops-empty" hidden="" id="dashboardOverdueEmpty">
+        <strong>
+         No hay solicitudes pendientes atrasadas.
+        </strong>
+        <p class="card-detail" id="dashboardOverdueEmptyHint">
+         Puedes ampliar el rango con «Últimos 90 días» para explorar otros estados de la demostración.
+        </p>
+       </div>
+       <div class="dashboard-table-footer">
+        <span class="field-hint" id="dashboardOverdueCount" role="status">
+        </span>
+        <nav aria-label="Páginas de solicitudes atrasadas" class="pagination">
+         <button aria-label="Página anterior" class="page-btn" id="dashboardOverduePrev" type="button">
+          ‹
+         </button>
+         <span class="dashboard-page-label" id="dashboardOverduePage">
+         </span>
+         <button aria-label="Página siguiente" class="page-btn" id="dashboardOverdueNext" type="button">
+          ›
+         </button>
+        </nav>
+       </div>
+      </section>
      </div>
+     <details class="surface ops-settings" id="dashboardSlaPanel" open="">
+      <summary>
+       <span class="metric-icon" data-icon-tone="indigo">
+        <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+         <circle cx="12" cy="12" r="9">
+         </circle>
+         <path d="M12 7v5l3 2">
+         </path>
+        </svg>
+       </span>
+       <span>
+        Configuración de SLA y multas
+       </span>
+       <span class="ops-local-note">
+        Guardado local
+       </span>
+      </summary>
+      <div class="ops-settings-body">
+       <p class="card-detail">
+        Parámetros de demostración. Se aplican a las solicitudes del escenario y se guardan solo en este navegador.
+       </p>
+       <form id="dashboardSlaForm" novalidate="">
+        <div class="ops-settings-grid">
+         <div>
+          <label class="label" for="dashboardSlaDays">
+           Plazo (días hábiles)
+          </label>
+          <input class="field" id="dashboardSlaDays" max="365" min="1" required="" step="1" type="number" value="20"/>
+         </div>
+         <div>
+          <label class="label" for="dashboardSlaRate">
+           Tarifa diaria (UTM)
+          </label>
+          <input class="field" id="dashboardSlaRate" max="100" min="0" required="" step="0.0001" type="number" value="1"/>
+         </div>
+         <div class="ops-holidays">
+          <label class="label" for="dashboardHolidays">
+           Feriados, uno por línea
+          </label>
+          <textarea aria-describedby="dashboardHolidaysHelp" class="field" id="dashboardHolidays" placeholder="2026-11-16
+2026-12-08" rows="3"></textarea>
+          <p class="field-hint" id="dashboardHolidaysHelp">
+           Formato AAAA-MM-DD. No se carga un calendario oficial automáticamente.
+          </p>
+         </div>
+         <div class="ops-conversion-field">
+          <label class="label" for="dashboardConversion">
+           Criterio de conversión
+          </label>
+          <select class="field" id="dashboardConversion">
+           <option value="application">
+            Mes de aplicación (escenario)
+           </option>
+           <option value="received">
+            Mes de recepción
+           </option>
+           <option value="deadline">
+            Mes de vencimiento
+           </option>
+          </select>
+         </div>
+        </div>
+        <p class="field-error" id="dashboardSlaError" role="alert">
+        </p>
+        <div class="ops-settings-actions">
+         <button class="btn btn-primary" type="submit">
+          Guardar configuración Centralizado
+         </button>
+         <button class="btn btn-ghost" id="dashboardSlaReset" type="button">
+          Restablecer parámetros
+         </button>
+         <span class="field-hint" id="dashboardSlaStatus" role="status">
+         </span>
+        </div>
+       </form>
+      </div>
+     </details>
+     <details class="surface ops-settings" id="dashboardUtmPanel" open="">
+      <summary>
+       <span class="metric-icon" data-icon-tone="amber">
+        <svg aria-hidden="true" class="icon" viewbox="0 0 24 24">
+         <circle cx="12" cy="12" r="9">
+         </circle>
+         <path d="M15 8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9M12 6v2M12 16v2">
+         </path>
+        </svg>
+       </span>
+       <span>
+        Valores UTM compartidos
+       </span>
+       <span class="badge badge-neutral">
+        Demostración
+       </span>
+      </summary>
+      <div class="ops-settings-body">
+       <p class="card-detail">
+        Valores de referencia tomados de la captura para probar la conversión. No son una consulta vigente al SII; puedes ingresar o editar un valor de ejemplo.
+       </p>
+       <div aria-label="Tabla desplazable horizontalmente. Usa las flechas para recorrer las columnas." class="data-wrap" role="region" tabindex="0">
+        <table class="data-table ops-utm-table">
+         <caption class="sr-only">
+          Valores mensuales UTM utilizados en la demostración
+         </caption>
+         <thead>
+          <tr>
+           <th scope="col">
+            Mes
+           </th>
+           <th scope="col">
+            Valor CLP
+           </th>
+           <th scope="col">
+            Origen
+           </th>
+           <th scope="col">
+            Acción
+           </th>
+          </tr>
+         </thead>
+         <tbody id="dashboardUtmRows">
+         </tbody>
+        </table>
+       </div>
+       <form class="ops-utm-form" id="dashboardUtmForm" novalidate="">
+        <div>
+         <label class="label" for="dashboardUtmMonth">
+          Mes
+         </label>
+         <input class="field" id="dashboardUtmMonth" required="" type="month" value="2026-11"/>
+        </div>
+        <div>
+         <label class="label" for="dashboardUtmValue">
+          1 UTM en CLP
+         </label>
+         <input class="field" id="dashboardUtmValue" max="10000000" min="1" placeholder="Ingresa un valor de ejemplo" required="" step="1" type="number"/>
+        </div>
+        <button class="btn btn-secondary" type="submit">
+         Guardar UTM
+        </button>
+        <p class="field-error ops-form-message" id="dashboardUtmError" role="alert">
+        </p>
+        <p class="field-hint ops-form-message" id="dashboardUtmStatus" role="status">
+        </p>
+       </form>
+      </div>
+     </details>
+     <p class="field-hint ops-footnote">
+      Solicitudes y reposiciones se presentan unificadas. Esta vista no modifica tarjetas ni define la política contractual de SLA posterior a una merma.
+     </p>
      <p aria-live="polite" class="sr-only" id="dashboardStatus" role="status">
      </p>
      <dialog aria-describedby="dashboardDetailNote" aria-labelledby="dashboardDetailTitle" class="dialog dashboard-detail" id="dashboardDetail">
       <div class="dialog-header">
-       <div>
-        <p class="eyebrow">
-         Detalle de solicitud
-        </p>
-        <h2 class="section-title" id="dashboardDetailTitle">
-         Solicitud de ejemplo
-        </h2>
-       </div>
+       <h2 class="section-title" id="dashboardDetailTitle">
+        Detalle de solicitud
+       </h2>
        <button aria-label="Cerrar detalle de solicitud" class="icon-btn" data-close-dialog="" type="button">
         ×
        </button>
       </div>
       <div class="dialog-content">
        <p class="field-hint" id="dashboardDetailNote">
-        Datos ficticios para revisar el comportamiento de la interfaz.
+        Solicitud ficticia. La estimación utiliza los parámetros de esta demostración.
        </p>
        <dl class="detail-fields" id="dashboardDetailFields">
        </dl>
        <h3 class="card-title">
-        Etapas del proceso
+        Seguimiento de tarjeta
        </h3>
-       <ol aria-label="Progreso de la solicitud" class="dashboard-detail-steps" id="dashboardDetailSteps">
+       <ol aria-label="Etapas de la tarjeta" class="dashboard-detail-steps ops-detail-steps" id="dashboardDetailSteps">
        </ol>
       </div>
       <div class="dialog-footer">
@@ -1400,6 +1650,8 @@
   <div aria-live="polite" class="toast-zone" id="toastZone" role="status">
   </div>
   <script defer="" src="src/app.js">
+  </script>
+  <script defer="" src="src/dashboard-model.js">
   </script>
   <script defer="" src="src/dashboard.js">
   </script>

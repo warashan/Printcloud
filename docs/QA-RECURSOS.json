@@ -1,6 +1,6 @@
 {
-  "pages": 12,
-  "references": 283,
+  "pages": 13,
+  "references": 317,
   "errors": [],
   "details": [
     {
@@ -50,6 +50,11 @@
     },
     {
       "page": "alertas.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "alertas.html",
       "reference": "index.html",
       "exists": true
     },
@@ -165,6 +170,11 @@
     },
     {
       "page": "buscadores.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "buscadores.html",
       "reference": "index.html",
       "exists": true
     },
@@ -280,6 +290,11 @@
     },
     {
       "page": "dashboard.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "dashboard.html",
       "reference": "index.html",
       "exists": true
     },
@@ -345,32 +360,17 @@
     },
     {
       "page": "dashboard.html",
-      "reference": "tablas.html",
-      "exists": true
-    },
-    {
-      "page": "dashboard.html",
-      "reference": "formularios.html",
-      "exists": true
-    },
-    {
-      "page": "dashboard.html",
-      "reference": "buscadores.html",
-      "exists": true
-    },
-    {
-      "page": "dashboard.html",
-      "reference": "steppers.html",
-      "exists": true
-    },
-    {
-      "page": "dashboard.html",
       "reference": "formularios.html",
       "exists": true
     },
     {
       "page": "dashboard.html",
       "reference": "src/app.js",
+      "exists": true
+    },
+    {
+      "page": "dashboard.html",
+      "reference": "src/dashboard-model.js",
       "exists": true
     },
     {
@@ -425,6 +425,11 @@
     },
     {
       "page": "formularios.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "formularios.html",
       "reference": "index.html",
       "exists": true
     },
@@ -540,6 +545,11 @@
     },
     {
       "page": "iconos.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "iconos.html",
       "reference": "index.html",
       "exists": true
     },
@@ -655,6 +665,11 @@
     },
     {
       "page": "index.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "index.html",
       "reference": "index.html",
       "exists": true
     },
@@ -716,6 +731,11 @@
     {
       "page": "index.html",
       "reference": "login.html",
+      "exists": true
+    },
+    {
+      "page": "index.html",
+      "reference": "merma-tarjetas.html",
       "exists": true
     },
     {
@@ -826,6 +846,11 @@
     {
       "page": "loaders.html",
       "reference": "dashboard.html",
+      "exists": true
+    },
+    {
+      "page": "loaders.html",
+      "reference": "merma-tarjetas.html",
       "exists": true
     },
     {
@@ -959,6 +984,131 @@
       "exists": true
     },
     {
+      "page": "merma-tarjetas.html",
+      "reference": "src/theme-init.js",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "dist/styles.css",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "assets/brand/favicon.png",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "src/refinements.css",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "#mainContent",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "index.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "assets/brand/printcloud_blanco.png",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "assets/brand/favicon.png",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "dashboard.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "index.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "tipografia.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "iconos.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "loaders.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "formularios.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "steppers.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "modales.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "tablas.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "buscadores.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "alertas.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "login.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "assets/brand/favicon.png",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "login.html",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "src/app.js",
+      "exists": true
+    },
+    {
+      "page": "merma-tarjetas.html",
+      "reference": "src/merma.js",
+      "exists": true
+    },
+    {
       "page": "modales.html",
       "reference": "src/theme-init.js",
       "exists": true
@@ -1001,6 +1151,11 @@
     {
       "page": "modales.html",
       "reference": "dashboard.html",
+      "exists": true
+    },
+    {
+      "page": "modales.html",
+      "reference": "merma-tarjetas.html",
       "exists": true
     },
     {
@@ -1120,6 +1275,11 @@
     },
     {
       "page": "steppers.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "steppers.html",
       "reference": "index.html",
       "exists": true
     },
@@ -1235,6 +1395,11 @@
     },
     {
       "page": "tablas.html",
+      "reference": "merma-tarjetas.html",
+      "exists": true
+    },
+    {
+      "page": "tablas.html",
       "reference": "index.html",
       "exists": true
     },
@@ -1346,6 +1511,11 @@
     {
       "page": "tipografia.html",
       "reference": "dashboard.html",
+      "exists": true
+    },
+    {
+      "page": "tipografia.html",
+      "reference": "merma-tarjetas.html",
       "exists": true
     },
     {

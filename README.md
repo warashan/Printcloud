@@ -28,7 +28,7 @@ La biblioteca usa datos ficticios. No incluye autenticación, validación real d
 
 ## Páginas
 
-`index.html`, `dashboard.html`, `login.html`, `tipografia.html`, `iconos.html`, `loaders.html`, `formularios.html`, `steppers.html`, `modales.html`, `tablas.html`, `buscadores.html` y `alertas.html`.
+`index.html`, `dashboard.html`, `merma-tarjetas.html`, `login.html`, `tipografia.html`, `iconos.html`, `loaders.html`, `formularios.html`, `steppers.html`, `modales.html`, `tablas.html`, `buscadores.html` y `alertas.html`.
 
 ## Desarrollo y regeneración
 
@@ -61,15 +61,28 @@ Las pruebas opcionales `npm run qa:browser` usan Playwright y Chrome/Chromium. C
 
 Las comprobaciones parciales no constituyen una declaración de conformidad integral WCAG 2.2 AA.
 
-## Dashboard de prueba · 10 de noviembre de 2026
+## Dashboard Centralizado · 12 de noviembre de 2026
 
-Abrir `dashboard.html`, disponible en **Páginas de prueba → Dashboard** y desde una tarjeta de la portada. Es una pantalla operativa de demostración con indicadores, gráficos, tabla, detalle de solicitud y accesos a los ejemplos del formulario, buscadores y stepper.
+Abrir `dashboard.html`, disponible en **Páginas de prueba → Dashboard**. Se reorganizó de acuerdo con las capturas recibidas, conservando los componentes, colores, temas y efectos hover.
 
-- Oficina y período actualizan indicadores, gráficos y tabla de manera coherente.
-- La búsqueda, los estados y la paginación se aplican a la tabla.
-- «Requieren atención» filtra las observaciones; «Actualizar resumen» muestra el loader y genera una notificación de demostración.
-- Las fechas corresponden a un escenario fijo de noviembre de 2026; no se consultan servicios ni se modifican registros reales.
+- Filtros Desde/Hasta, sucursal, Mes actual y Últimos 90 días.
+- Seis indicadores: solicitudes, stock disponible, impresas, pendientes, merma oficial y multas estimadas.
+- Seguimiento acumulativo por fecha de solicitud, estado diario por recepción y gráfico por sucursal, con tablas alternativas.
+- Atrasos con búsqueda, paginación, detalle y exportación CSV.
+- Configuración local de plazo hábil, tarifa UTM, feriados y criterio de conversión; valores UTM mensuales editables.
+- Selector de escenario con datos o sin solicitudes para comprobar estados vacíos.
 
-La biblioteca incorpora seis tonos de iconos con variantes para claro y oscuro, definidos en `src/refinements.css`. La selección del menú conserva su fondo, sin franja lateral celeste.
+El corte del escenario es **12 de noviembre de 2026**, no la fecha actual. El stock de 664 tarjetas es una fotografía de ejemplo y no cambia con el rango de fechas. Los valores UTM de enero a octubre reproducen referencias de las capturas; no hay consulta al SII. Noviembre debe completarse como valor de ejemplo si se requiere una conversión. Una UTM faltante se muestra como «Conversión pendiente», sin asumir cero.
 
-Fuentes del Dashboard: `components/dashboard-content.html` y `src/dashboard.js`. El generador conserva la página y sus enlaces. Ver [guía y QA del Dashboard](docs/DASHBOARD.md).
+Fuentes: `components/dashboard-content.html`, `src/dashboard-model.js`, `src/dashboard.js` y los estilos encapsulados en `src/refinements.css`. El generador conserva la vista y sus scripts. Ver [guía y alcance](docs/DASHBOARD.md).
+
+```bash
+npm run qa:dashboard-model
+npm run qa:dom
+# Opcional, con Playwright/Chrome configurado:
+npm run qa:dashboard
+```
+
+## Merma de tarjetas
+
+Nueva página `merma-tarjetas.html`, accesible desde el menú de páginas de prueba y la matriz. Incluye filtros, tabla paginada, consulta de adjuntos y un modal para declarar merma con motivo, fotografías/documentos y selección de folios. Los registros y archivos duran hasta recargar la pestaña; no hay conexión a inventario ni backend. Detalle en [docs/MERMA-TARJETAS.md](docs/MERMA-TARJETAS.md). Verificación: `npm run qa:merma`.

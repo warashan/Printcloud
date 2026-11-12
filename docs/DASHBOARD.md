@@ -1,35 +1,58 @@
-# Dashboard de prueba
+# Dashboard de prueba · Centralizado
 
-Página: `dashboard.html`. Disponible en «Páginas de prueba → Dashboard» y en la matriz de elementos. Permite revisar los componentes de PrintCloud dentro de una composición operativa, con datos ficticios.
+Actualizado el 12 de noviembre de 2026 a partir de las seis capturas aportadas. Abrir `dashboard.html` o entrar por «Páginas de prueba → Dashboard». La portada sigue siendo la matriz de elementos.
 
-## Recorrido sugerido para Francisco
+## Composición
 
-1. Cambiar oficina y período: los cuatro indicadores, el gráfico diario, la distribución por estado y las solicitudes cambian juntos.
-2. Abrir «Ver datos del gráfico» para consultar los mismos valores en una tabla accesible.
-3. Buscar una solicitud, oficina o tipo; «vina» encuentra «Viña». Probar un término inexistente y usar «Restablecer filtros».
-4. Elegir un estado y recorrer la tabla con Anterior/Siguiente. «Ver solicitudes» en «Requieren atención» selecciona las observaciones.
-5. Abrir «Ver detalle»: se presenta un diálogo con los datos y las etapas del proceso. Escape cierra y devuelve el foco a la solicitud.
-6. Pulsar «Actualizar resumen»: se muestra un loader breve y una notificación que también queda en el historial. Los valores siguen siendo los del escenario de ejemplo.
-7. Contraer el menú, cambiar de tema y reducir el ancho para comparar el comportamiento responsive.
-8. Usar los accesos al formulario, los buscadores y el stepper de la biblioteca.
+1. Filtros Desde/Hasta y sucursal, con Aplicar filtros, Mes actual y Últimos 90 días.
+2. Seis indicadores: Solicitudes, Stock disponible, Impresas, Pendientes, Merma oficial y Multas estimadas.
+3. Seguimiento global de tarjetas: Total, Impresas, Ensobradas y tabla por fecha de solicitud, con paginación y avance de impresión.
+4. Estado por fecha de recepción: gráfico de impresas vigentes, pendientes actuales y merma oficial; tabla accesible con los mismos datos.
+5. Solicitudes por sucursal: doce sucursales según las capturas, con barras para solicitudes y pendientes y una tabla alternativa.
+6. Solicitudes pendientes con atraso: búsqueda, paginación, detalle, CSV y estado vacío.
+7. Paneles desplegables de configuración de SLA/multas y valores UTM compartidos, usando formularios de la biblioteca.
 
-## Alcance y datos
+Se mantienen iconos con colores, temas claro/oscuro/sistema, hovers de paneles, menú compacto, perfil y notificaciones. Los gráficos tienen colores vivos y alternativas tabulares; las tablas y el gráfico diario permiten desplazamiento dentro de su región en pantallas pequeñas.
 
-Los datos se generan de forma determinista en `src/dashboard.js`, con oficinas Santiago, Valparaíso, Viña del Mar y Quilpué. El escenario termina el 10 de noviembre de 2026 y ofrece períodos de 7 o 14 días; no representa el día actual ni una operación real.
+## Recorrido sugerido
 
-Oficina y período afectan todo el resumen. El texto de búsqueda y los botones de estado filtran únicamente la tabla. No se guardan cambios en solicitudes, no se consulta un backend ni se envían trabajos a impresoras.
+- Aplicar un rango y una sucursal; comprobar que los indicadores y los gráficos usan los mismos filtros.
+- Seleccionar **Sin solicitudes** para ver los estados vacíos de las capturas. El stock actual permanece disponible.
+- Volver a **Con datos de ejemplo** y usar **Últimos 90 días**: aparecen solicitudes atrasadas para explorar el detalle y la exportación CSV.
+- Revisar el aviso de conversión pendiente. Completar un valor de ejemplo para noviembre de 2026 y comprobar el equivalente en CLP.
+- Cambiar el plazo, tarifa o feriados y guardar. La estimación se recalcula; los parámetros persisten al recargar.
+- Usar «Editar» en una UTM de referencia para cargar el mes y el valor en el formulario.
+- Abrir y cerrar los paneles con teclado, cambiar el tema y contraer el menú.
 
-## Fuentes
+## Datos y reglas explícitas del escenario
 
-- `components/dashboard-content.html`: composición del Dashboard, incluida por `scripts/generate.py`.
-- `src/dashboard.js`: datos y comportamiento de esta página, cargado solo en el Dashboard.
-- `src/refinements.css`: estilos responsive del Dashboard y seis tonos de iconos, con variantes claro/oscuro.
-- `scripts/refine_pages.py`: navegación a páginas de prueba, tonos estables de iconos y conservación del script específico al regenerar.
+El corte está fijado al **12 de noviembre de 2026**. Las solicitudes ficticias cubren los sesenta días previos. Mes actual se refiere al mes de ese corte. El rango admite hasta 366 días y también puede consultarse un período sin registros.
 
-Los enlaces del menú y el marcado se conservan al ejecutar el generador. La matriz de elementos sigue siendo la portada del proyecto.
+- **Solicitudes/Impresas/Pendientes:** se filtran por fecha de recepción. Una relación física activa, con folio, identificador coincidente y fecha de asignación válida hasta el corte permite contar como impresa. Las demás solicitudes siguen pendientes.
+- **Seguimiento:** se filtra por fecha de solicitud. Las etapas son acumulativas: ensobradas ≤ impresas ≤ total. Ensobrar requiere membresía normalizada, sobre coincidente y fecha válida. Por esta diferencia de fecha, los totales de seguimiento pueden diferir de los recibidos en el período; la interfaz lo indica.
+- **Merma oficial:** usa su fecha de declaración. No se deriva de restar impresas al total. Una tarjeta anulada no cuenta como vigente.
+- **Stock:** suma 664 en el escenario general y puede limitarse por sucursal, pero nunca por rango de fechas. No se descuenta al filtrar ni al guardar parámetros.
+- **SLA de ejemplo:** por defecto, 20 días hábiles y 1 UTM por día hábil de atraso. Se excluye la fecha de recepción del conteo, se omiten sábados, domingos y las fechas configuradas como feriado. El mismo día del vencimiento no hay atraso. No se carga un calendario legal automáticamente.
+- **Estimación:** se calcula solo sobre las solicitudes recibidas dentro del filtro que siguen pendientes al corte. La fecha original de recepción se mantiene después de una merma. Estas decisiones son reglas explícitas de demostración, no una definición de la política contractual real.
+- **Conversión:** el mes se elige por aplicación, recepción o vencimiento. Si falta un valor UTM, el equivalente en CLP queda pendiente; no se calcula como cero. Cada importe CLP se redondea al peso y el total suma los importes por solicitud.
 
-## Validación
+Los valores enero–octubre de 2026 provienen de las capturas y llevan la etiqueta «Referencia de captura · demo». Noviembre no se proporciona inicialmente. Los valores ingresados se identifican como «Ingresado en demo». No se presentan como valores oficiales vigentes ni existe una consulta al SII.
 
-38 casos de la suite DOM ampliada, 13 grupos de comprobaciones del Dashboard en Chrome y auditoría estática de las 12 páginas aprobados. Capturas y reportes se encuentran en `qa-dashboard/`, `QA-DASHBOARD.json` y `QA-DASHBOARD-DOM.json`.
+## Guardado local
 
-La prueba de navegador es reproducible con `scripts/qa-dashboard.mjs`, usando las mismas variables de Playwright/Chrome descritas en el README. La plantilla no requiere esas dependencias para visualizarse.
+`printcloud-centralizado-settings-v1` almacena el plazo, tarifa, feriados y criterio de conversión. `printcloud-centralizado-utm-v1` almacena las UTM editadas. La entrada se valida al guardar y al recuperar. Si el navegador bloquea el almacenamiento, el formulario informa que los cambios se aplicaron solo a la pestaña.
+
+La exportación contiene los pendientes atrasados que coinciden con el rango, la sucursal y la búsqueda; no solo la página visible. Si falta conversión, el CSV lo indica expresamente.
+
+## Mantenimiento y QA
+
+- `components/dashboard-content.html`: marcado de la vista.
+- `src/dashboard-model.js`: calendario, integridad de etapas, filtros y estimaciones puras del escenario.
+- `src/dashboard.js`: interacción, validación, gráficos SVG/HTML, formularios y exportación.
+- `scripts/generate.py` y `scripts/refine_pages.py`: regeneración e inclusión ordenada de los scripts.
+- `src/refinements.css`: estilos del Dashboard y componentes compartidos.
+- `scripts/qa-dashboard-model.mjs`: casos de borde del modelo.
+- `scripts/qa-dom.mjs`: inicialización de toda la biblioteca y lógica DOM.
+- `scripts/qa-dashboard.mjs`: prueba opcional de Chrome; usar las variables de Playwright/Chrome descritas en el README.
+
+Reportes actuales: `QA-CENTRALIZADO.json`, `QA-CENTRALIZADO-DOM.json`, `QA-CENTRALIZADO-MODELO.json` y capturas en `qa-centralizado/`. Las evidencias de `qa-dashboard/` corresponden al diseño previo. Ver `QA.md` para límites de validación.

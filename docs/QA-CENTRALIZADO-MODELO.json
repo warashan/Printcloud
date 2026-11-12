@@ -1,0 +1,97 @@
+{
+  "environment": "Node; modelo puro de demostración",
+  "results": [
+    {
+      "name": "Fecha ISO: descarta días inexistentes",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Plazo: excluye fin de semana y no cuenta la recepción",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Plazo: feriado extiende el vencimiento",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Atraso: vencimiento no genera multa el mismo día",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Atraso: omite sábados, domingos y feriados",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Ensobrado: membresía normalizada y acumulación",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Ensobrado: sobre diferente no cuenta como ensobrada",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Ensobrado: fecha inválida o futura no cuenta",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Relación física ajena deja la solicitud pendiente",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Tarjeta anulada no cuenta como impresa vigente",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Multa: no se estima para una tarjeta vigente",
+      "status": "Aprobado"
+    },
+    {
+      "name": "UTM faltante: conversión pendiente, nunca cero ficticio",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Conversión aplica tarifa decimal y valor del mes indicado",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Conversión por recepción y por vencimiento",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Tarifa cero no requiere UTM",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Resumen: solicitudes = impresas + pendientes",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Merma se filtra por fecha de declaración",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Seguimiento usa fecha de solicitud y no recepción",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Stock se mantiene fuera del rango de fechas",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Sucursal filtra indicadores, gráficos y stock",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Escenario vacío conserva stock y ceros válidos",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Validaciones: configuración y mes",
+      "status": "Aprobado"
+    },
+    {
+      "name": "Rango inválido o excesivo se rechaza",
+      "status": "Aprobado"
+    }
+  ]
+}
