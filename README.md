@@ -1,7 +1,8 @@
 # PrintCloud · Proyecto original mejorado v2.2
 
 Actualización sobre `Printcloud-Original-Mejorado-v2.1.zip`, siguiendo la revisión del 4 de noviembre de 2026. Conserva las pantallas de la biblioteca, los logotipos originales, el sistema de diseño azul, los loaders, las animaciones y el historial de notificaciones. `index.html` sigue siendo la matriz de elementos.
-<img width="1786" height="895" alt="image" src="https://github.com/user-attachments/assets/553502c5-953f-4b56-a4f1-9789f7e799f1" />
+
+![Matriz de elementos de PrintCloud actualizada](docs/printcloud_actualizado.png)
 
 
 ## Abrir
