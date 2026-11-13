@@ -4,6 +4,8 @@ Actualización sobre `Printcloud-Original-Mejorado-v2.1.zip`, siguiendo la revis
 
 ![Matriz de elementos de PrintCloud actualizada](docs/printcloud_actualizado.png)
 
+Consulta el [historial de cambios](CHANGELOG.md) para revisar las mejoras, correcciones y entregas del proyecto.
+
 
 ## Abrir
 
