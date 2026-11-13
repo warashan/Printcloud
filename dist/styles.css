@@ -2043,7 +2043,7 @@ html[data-theme="dark"] {
       object-fit: contain;
       border-radius: 9px;
     }
-    html[data-sidebar="collapsed"] .sidebar > .nav-heading, html[data-sidebar="collapsed"] .sidebar > .nav-heading + div, html[data-sidebar="collapsed"] .sidebar-note {
+    html[data-sidebar="collapsed"] .sidebar .sidebar-scroll > .nav-heading, html[data-sidebar="collapsed"] .sidebar .sidebar-scroll > .nav-heading + div, html[data-sidebar="collapsed"] .sidebar-note {
       display: none;
     }
     html[data-sidebar="collapsed"] .sidebar .nav-link {

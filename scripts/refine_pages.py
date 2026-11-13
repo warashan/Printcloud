@@ -88,6 +88,13 @@ def refine_all(root):
     empty.append(insert('<p class="field-hint">Usa «Limpiar filtros» para volver al listado completo.</p>'))
    if not soup.select_one('#tableDetailDialog'):
     soup.body.append(insert('<dialog class="dialog" id="tableDetailDialog" aria-labelledby="tableDetailTitle" aria-describedby="tableDetailNote"><div class="dialog-header"><h2 id="tableDetailTitle" class="section-title">Detalle de solicitud</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Cerrar detalle">×</button></div><div class="dialog-content"><p id="tableDetailNote" class="field-hint">Datos ficticios de la biblioteca. No corresponde a una solicitud real.</p><dl id="tableDetailFields" class="detail-fields"></dl></div><div class="dialog-footer"><button type="button" class="btn btn-secondary" data-close-dialog>Cerrar</button></div></dialog>'))
+  # El logotipo y el cierre móvil quedan fuera del área desplazable.
+  if sidebar and not sidebar.select_one('.sidebar-scroll'):
+   scroll=soup.new_tag('div',attrs={'class':'sidebar-scroll'})
+   for node in list(sidebar.children):
+    if getattr(node,'name',None) and ('brand' in node.get('class',[]) or node.get('id')=='sidebarClose'):continue
+    scroll.append(node.extract())
+   sidebar.append(scroll)
   file.write_text(soup.prettify(),encoding='utf-8')
 
 if __name__=='__main__':refine_all(Path(__file__).resolve().parents[1])
